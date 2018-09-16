@@ -6,12 +6,13 @@ module.exports = function(cb) {
 		onload : function(e) {
 			var feed = {};
 			try {
-				var feed = new XMLTools(this.responseXML).toObject();
+				feed = new XMLTools(this.responseXML).toObject();
 			} catch(E) {
 				console.log(E);
 			}
 			if (feed.vcalendar)
 				cb(feed.vcalendar.vevent);
+			else console.log('no vcalendar in feed');	
 		},
 		onerror : function(e) {
 			console.log(e);

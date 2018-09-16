@@ -10,8 +10,9 @@ var feed=new XMLTools(this.responseXML).toObject();
 }catch(E){
 console.log(E);
 }
-feed.vcalendar&&
-cb(feed.vcalendar.vevent);
+feed.vcalendar?
+cb(feed.vcalendar.vevent):
+console.log('no vcalendar in feed');
 },
 onerror:function(e){
 console.log(e);
