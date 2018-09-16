@@ -1,0 +1,3 @@
+# MunichWays
+
+Install with: 
