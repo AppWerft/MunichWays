@@ -12,7 +12,8 @@ module.exports = function(cb) {
 			}
 			if (feed.vcalendar)
 				cb(feed.vcalendar.vevent);
-			else console.log('no vcalendar in feed');	
+			else
+				console.log('no vcalendar in feed');
 		},
 		onerror : function(e) {
 			console.log(e);
