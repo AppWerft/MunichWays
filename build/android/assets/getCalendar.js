@@ -4,15 +4,17 @@ module.exports=function(cb){
 const URL='https://www.munichways.com/?plugin=all-in-one-event-calendar&controller=ai1ec_exporter_controller&action=export_events&xml=true',
 $=Ti.Network.createHTTPClient({
 onload:function(e){
-const json=null,
-xml=this.responseText;
+var feed={};
 try{
-json=new XMLTools(this.responseText).toJSON(),
-console.log(json);
+var feed=new XMLTools(this.responseXML).toObject();
 }catch(E){
 console.log(E);
 }
-
+feed.vcalendar&&
+cb(feed.vcalendar.vevent);
+},
+onerror:function(e){
+console.log(e);
 }});
 
 $.open('GET',URL),

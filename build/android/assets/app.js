@@ -22,6 +22,16 @@ enableZoomControls:!1}),
 
 $.add($.mapView);
 
+function onLocationChanged(e){
+e.coords&&$.mapView.setLocation({
+animate:!0,
+latitudeDelta:0.04,
+longitudeDelta:0.04,
+latitude:e.coords.latitude,
+longitude:e.coords.longitude});
+
+}
+
 const routes=[{
 file:'A_gelb_rot_schwarz_Vorrangstrecken',
 color:'red'},
@@ -49,7 +59,6 @@ color:'blue'}];
 
 routes.forEach(function(item){
 const GEO=JSON.parse(Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory,'data','geojson',item.file+'.geojson').read().getText());
-
 GEO.features.forEach(function(f){
 const points=f.geometry.coordinates.map(function(c){
 return{
@@ -64,7 +73,14 @@ color:item.color,
 width:8}));
 
 });
-}),
+});
+
+function onCalendarClick(){
+var onCalendarload=function(cal){
+console.log(cal);
+};
+require('getCalendar')(onCalendarload);
+}
 
 $.activity.onCreateOptionsMenu=function(e){
 abx.backgroundColor='rgb(51, 153, 255)',
@@ -74,12 +90,20 @@ var menu=e.menu;
 menuItem=menu.add({
 title:'Kalender',
 icon:'/calendar.png',
-showAsAction:Ti.Android.SHOW_AS_ACTION_IF_ROOM|Ti.Android.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW});
+showAsAction:Ti.Android.SHOW_AS_ACTION_IF_ROOM|Ti.Android.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW}).
+addEventListener('click',onCalendarClick),
+require('libs/checkPermissions')(['ACCESS_FINE_LOCATION'],{
+onOK:function(e){
+Ti.Geolocation.accuracy=Ti.Geolocation.ACCURACY_BEST,
+Ti.Geolocation.distanceFilter=20,
+Ti.Geolocation.preferredProvider=Ti.Geolocation.PROVIDER_GPS,
+Ti.Geolocation.addEventListener('location',onLocationChanged),
+$.mapView.userLocation=!0;
+},
+onError:function(){
+alert('So, dann funktioniert die App nicht. Schade.');
+}}),
 
-};
-var onCalendarload=function(cal){
-console.log(cal);
-};
-require('getCalendar')(onCalendarload),
-
+$.addEventListener('close',onLocationChanged);
+},
 $.open();

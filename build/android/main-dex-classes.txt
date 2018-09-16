@@ -597,6 +597,7 @@ org/appcelerator/kroll/common/TiMessenger.class
 android/support/design/widget/CoordinatorLayout$ViewElevationComparator.class
 android/support/v4/view/ViewCompat$FocusDirection.class
 android/support/v7/appcompat/R$dimen.class
+ti/modules/titanium/geolocation/GeolocationModule.class
 android/support/v4/app/FragmentManager.class
 android/support/design/widget/CoordinatorLayout$1.class
 android/support/annotation/Px.class

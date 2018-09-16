@@ -41,4 +41,6 @@
 -injars "/Users/fuerst/Library/Application Support/Titanium/mobilesdk/osx/7.1.0.GA/android/modules/titanium-locale.jar"(!META-INF/**)
 -injars "/Users/fuerst/Library/Application Support/Titanium/mobilesdk/osx/7.1.0.GA/android/modules/titanium-network.jar"(!META-INF/**)
 -injars "/Users/fuerst/Library/Application Support/Titanium/mobilesdk/osx/7.1.0.GA/android/modules/titanium-xml.jar"(!META-INF/**)
+-injars "/Users/fuerst/Library/Application Support/Titanium/mobilesdk/osx/7.1.0.GA/android/modules/titanium-geolocation.jar"(!META-INF/**)
+-injars "/Users/fuerst/Library/Application Support/Titanium/mobilesdk/osx/7.1.0.GA/android/modules/titanium-platform.jar"(!META-INF/**)
 -outjars "/Users/fuerst/Documents/MLearning/MunichWays/build/android/mainDexClasses.jar"
