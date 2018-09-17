@@ -16,6 +16,7 @@
 "/Users/fuerst/Documents/MLearning/MunichWays/build/android/gen/de/appwerft/munichways/MunichwaysAppInfo.java"
 "/Users/fuerst/Documents/MLearning/MunichWays/build/android/gen/de/appwerft/munichways/MunichwaysApplication.java"
 "/Users/fuerst/Documents/MLearning/MunichWays/build/android/gen/de/appwerft/munichways/R.java"
+"/Users/fuerst/Documents/MLearning/MunichWays/build/android/gen/de/appwerft/soup/R.java"
 "/Users/fuerst/Documents/MLearning/MunichWays/build/android/gen/ti/map/R.java"
 "/Users/fuerst/Documents/MLearning/MunichWays/build/android/gen/ti/modules/titanium/ui/Manifest.java"
 "/Users/fuerst/Documents/MLearning/MunichWays/build/android/gen/ti/modules/titanium/ui/R.java"
