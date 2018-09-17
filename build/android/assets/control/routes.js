@@ -1,9 +1,12 @@
 var $=function(){
+console.log('Init routes'),
 this.routes=[];
 var that=this;
-require("data/routes").forEach(function(item){
-const GEO=JSON.parse(Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory,"data","geojson",item.file+".geojson").read().getText());
-GEO.features.forEach(function(f){
+require('data/routes').forEach(function(item,iindex){
+const GEO=JSON.parse(Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory,'data','geojson',item.file+'.geojson').read().getText());
+GEO.features.forEach(function(f,findex){
+console.log('Feature '+iindex+' '+findex),
+console.log(f);
 const points=f.geometry.coordinates.map(function(c){
 return{
 latitude:c[1],

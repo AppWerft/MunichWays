@@ -24,13 +24,20 @@ enableZoomControls:!1}),
 $.add($.mapView);
 
 function onLocationChanged(e){
+if(coords){
+var coords=e.coords;
+const R=0.05;
+53<coords.latitude&&(
+coords.latitude=48.1490796+Math.random()*R-R/2,
+coords.longitude=11.4587669+Math.random()*R-R/2);
+
 const region=$.mapView.getRegion();
-e.coords&&$.mapView.setLocation({
+$.mapView.setLocation({
 animate:!0,
 latitudeDelta:region.latitudeDelta,
 longitudeDelta:region.longitudeDelta,
-latitude:e.coords.latitude,
-longitude:e.coords.longitude});
+latitude:coords.latitude,
+longitude:coords.longitude})}
 
 }
 
