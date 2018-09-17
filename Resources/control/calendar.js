@@ -12,7 +12,7 @@ module.exports = function(cb) {
 				const image = events.item(i).getElementsByTagName("x-wp-images-url").item(0).textContent.split(',')[1].split(';')[1];
 				data.push({
 					image : image,
-					start : Moment(events.item(i).getElementsByTagName("dtstart").item(0).textContent).format('LLL'),
+					start : Moment(events.item(i).getElementsByTagName("dtstart").item(0).textContent).locale("de").format('LLL'),
 					end : events.item(i).getElementsByTagName("dtend").item(0).textContent.trim(),
 					description : events.item(i).getElementsByTagName("description").item(0).textContent.replace('\n\n','\n').trim(),
 					location : events.item(i).getElementsByTagName("location").item(0).textContent.trim(),

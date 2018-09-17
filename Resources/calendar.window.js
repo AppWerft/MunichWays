@@ -66,7 +66,7 @@ module.exports = function onCalendarClick() {
 				}
 			}));
 			$.add(Ti.UI.createLabel({
-				bottom : 0,
+				bottom : 5,
 				height : Ti.UI.SIZE,
 				textAlign : 'left',
 				width : Ti.UI.FILL,

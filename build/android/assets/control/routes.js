@@ -57,7 +57,7 @@ var allRoutes=[];
 
 
 
-return this.routes.forEach(function(route){if(route.points.length){var dists=[];const turf=require("org.turf");var point=turf.point([coords.latitude,coords.longitude]),line=turf.lineString(route.points.map(function(p){return[p.latitude,p.longitude]})),distance=turf.pointToLineDistance(point,line,{units:"meters"});allRoutes.push({distance:parseFloat(distance),name:route.meta.name,description:route.meta.description,id:route.meta.id})}}),allRoutes.sort(function(a,b){return a.distance-b.distance}),allRoutes.shift();
+return this.routes.forEach(function(route){if(route.points.length){var dists=[];const turf=require("org.turf");var point=turf.point([coords.latitude,coords.longitude]),line=turf.lineString(route.points.map(function(p){return[p.latitude,p.longitude]})),distance=turf.pointToLineDistance(point,line,{units:"meters"});allRoutes.push({distance:parseFloat(distance),name:route.meta.name,description:route.meta.description,id:route.id})}}),allRoutes.sort(function(a,b){return a.distance-b.distance}),allRoutes.shift();
 },
 
 $.prototype.addAllToMap=function(map){
@@ -66,18 +66,18 @@ this.routes.forEach(function(route){
 that.Routes[route.id]=TiMap.createRoute({
 points:route.points,
 color:route.color,
-width:10,
-id:route.id}),
+width:10}),
 
 map.addRoute(that.Routes[route.id]);
 });
 },
 
 $.prototype.selectRoute=function(id){
-this.activeRoute&&(this.Routes[this.activeRoute].width=10),
+this.activeRoute&&(
+this.Routes[this.activeRoute].width=10),
 this.activeRoute=id,
-this.Routes[this.activeRoute].width=20;
+console.log(id),
+this.Routes[id]&&this.Routes[id].setWidth(20);
 },
-
 
 module.exports=$;

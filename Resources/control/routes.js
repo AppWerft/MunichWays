@@ -50,7 +50,7 @@ $.prototype.getNearestRoute = function(coords) {
 				distance : parseFloat(distance),
 				name : route.meta.name,
 				description : route.meta.description,
-				id : route.meta.id
+				id : route.id
 			});
 		}
 	});
@@ -61,23 +61,23 @@ $.prototype.getNearestRoute = function(coords) {
 };
 
 $.prototype.addAllToMap = function(map) {
-	var that=this;
+	var that = this;
 	this.routes.forEach(function(route) {
 		that.Routes[route.id] = TiMap.createRoute({
 			points : route.points,
 			color : route.color,
-			width : 10,
-			id : route.id
+			width : 10
 		});
 		map.addRoute(that.Routes[route.id]);
 	});
 };
 
-$.prototype.selectRoute= function(id){
-	if (this.activeRoute) this.Routes[this.activeRoute].width=10;
-	this.activeRoute=id;
-	this.Routes[this.activeRoute].width=20;
+$.prototype.selectRoute = function(id) {
+	if (this.activeRoute)
+		this.Routes[this.activeRoute].width = 10;
+	this.activeRoute = id;
+	console.log(id);
+	this.Routes[id] && this.Routes[id].setWidth(20);
 };
-
 
 module.exports = $;

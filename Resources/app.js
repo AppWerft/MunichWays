@@ -41,7 +41,7 @@ function onLocationChanged(e) {
 		longitude : coords.longitude
 	});
 	var nearestRoute = Routes.getNearestRoute(coords);
-
+	
 	$.hintText.setText(nearestRoute.name + ' (' + Math.round(nearestRoute.distance) + 'm)');
 	if (nearestRoute.distance > 500) {
 		$.hintView.animate({
@@ -51,13 +51,15 @@ function onLocationChanged(e) {
 		$.hintView.animate({
 			bottom : 0
 		});
+		Routes.selectRoute(nearestRoute.id);
 }
 
 var Routes = new RouteModule();
 Routes.addAllToMap($.mapView);
 $.hintView = Ti.UI.createView({
 	height : 50,
-	backgroundColor : 'rgb(100,51, 153, 255)',
+	backgroundColor : 'rgb(51, 153, 255)',
+	opacity:0.8,
 	bottom : -100
 });
 $.hintView.add(Ti.UI.createLabel({
