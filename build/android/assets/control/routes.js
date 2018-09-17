@@ -77,7 +77,7 @@ this.activeRoute&&(
 this.Routes[this.activeRoute].width=10),
 this.activeRoute=id,
 console.log(id),
-this.Routes[id]&&this.Routes[id].setWidth(20);
+this.Routes[id]&&this.Routes[id].setWidth(30);
 },
 
 module.exports=$;
