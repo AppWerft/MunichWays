@@ -1,0 +1,10 @@
+version: 5.0.0
+description: a node.js library for performing geospatial operations with geojson
+author: morganherlocker
+license: MIT
+copyright: Copyright © 2017 morganherlocker
+name: turfjs
+moduleid: org.turf
+guid: fc08de37-9f6b-db73-fee9-efeba8b630aa
+platform: commonjs
+minsdk: 3.2.0.GA

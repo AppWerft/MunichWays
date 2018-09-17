@@ -1,6 +1,6 @@
 const Map = require('ti.map'),
     abx = require('com.alcoapps.actionbarextras');
-    RouteModule =require('/control/routes');
+RouteModule = require('/control/routes');
 
 var $ = Ti.UI.createWindow({
 	exitOnClose : true
@@ -24,27 +24,41 @@ $.mapView = Map.createView({
 $.add($.mapView);
 
 function onLocationChanged(e) {
-	if(!coords) return;
 	var coords = e.coords;
+	if (!coords) {
+		return;
+	}	
 	const R = 0.05;
-	if(coords.latitude>53.0) { // Mock in HH to Stachus
-		coords.latitude= 48.1490796 + Math.random()*R-R/2;
-		coords.longitude= 11.4587669+ Math.random()*R-R/2;
+	if (coords.latitude > 53.0) {// Mock in HH to Stachus
+		coords.latitude = 48.1490796 + Math.random() * R - R / 2;
+		coords.longitude = 11.4587669 + Math.random() * R - R / 2;
 	}
-	const region = $.mapView.getRegion();
 	$.mapView.setLocation({
 		animate : true,
-		latitudeDelta : region.latitudeDelta,
-		longitudeDelta : region.longitudeDelta,
+		latitudeDelta : $.mapView.getRegion().latitudeDelta,
+		longitudeDelta : $.mapView.getRegion().longitudeDelta,
 		latitude : coords.latitude,
 		longitude : coords.longitude
 	});
+	var nearestRoute = Routes.getNearestRoute(coords);
+	console.log(nearestRoute);
+	$.hintText.setText(nearestRoute.name+ ' ('+Math.round(nearestRoute.dist)+'m)');
+	
+	if(nearestRoute.dist>10000) {
+		$.hintView.animate({bottom:-100});
+	} else $.hintView.animate({bottom:0});
 }
 
-
 var Routes = new RouteModule();
-Routes.addAllToMap($.mapView); 
-
+Routes.addAllToMap($.mapView);
+$.hintView = Ti.UI.createView({
+	height:50,
+	backgroundColor:'white',
+	bottom: -100
+});
+$.hintText = Ti.UI.createLabel({color:'black',font:{fontSize:20}});
+$.hintView.add($.hintText);
+$.add($.hintView);
 
 $.activity.onCreateOptionsMenu = function(e) {
 	abx.backgroundColor = 'rgb(51, 153, 255)';

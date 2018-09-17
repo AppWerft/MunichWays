@@ -24,27 +24,41 @@ enableZoomControls:!1}),
 $.add($.mapView);
 
 function onLocationChanged(e){
-if(coords){
 var coords=e.coords;
+if(coords){
+
+
 const R=0.05;
 53<coords.latitude&&(
 coords.latitude=48.1490796+Math.random()*R-R/2,
-coords.longitude=11.4587669+Math.random()*R-R/2);
+coords.longitude=11.4587669+Math.random()*R-R/2),
 
-const region=$.mapView.getRegion();
 $.mapView.setLocation({
 animate:!0,
-latitudeDelta:region.latitudeDelta,
-longitudeDelta:region.longitudeDelta,
+latitudeDelta:$.mapView.getRegion().latitudeDelta,
+longitudeDelta:$.mapView.getRegion().longitudeDelta,
 latitude:coords.latitude,
-longitude:coords.longitude})}
+longitude:coords.longitude});
+
+var nearestRoute=Routes.getNearestRoute(coords);
+console.log(nearestRoute),
+$.hintText.setText(nearestRoute.name+' ('+Math.round(nearestRoute.dist)+'m)'),
+$.hintView.animate({bottom:0}),
+1e3<nearestRoute.dist&&
+$.hintView.animate({bottom:-100})}
 
 }
 
-
 var Routes=new RouteModule;
 Routes.addAllToMap($.mapView),
+$.hintView=Ti.UI.createView({
+height:50,
+backgroundColor:'white',
+bottom:-100}),
 
+$.hintText=Ti.UI.createLabel({color:'black',font:{fontSize:20}}),
+$.hintView.add($.hintText),
+$.add($.hintView),
 
 $.activity.onCreateOptionsMenu=function(e){
 abx.backgroundColor='rgb(51, 153, 255)',
