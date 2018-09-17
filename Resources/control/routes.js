@@ -8,6 +8,8 @@ function getDist(lat1, lng1, lat2, lng2) {
 	return 2 * R * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
+const Turf = require('org.turf');
+
 /** Extend Number object with method to convert numeric degrees to radians */
 if (Number.prototype.toRadians === undefined) {
 	Number.prototype.toRadians = function() {
@@ -36,12 +38,12 @@ var $ = function() {
 			});
 			if (points.length > 1)
 				that.routes.push({
-					points : points,
 					id : iindex + '_' + findex,
 					meta : {
 						name : f.properties.Name,
 						description : f.properties.description
 					},
+					points : points,
 					color : item.color
 				});
 		});
@@ -54,12 +56,15 @@ $.prototype.getNearestRoute = function(coords) {
 	this.routes.forEach(function(route) {
 		if (route.points.length) {
 			var dists = [];
-			
-			var dists = route.points.map(function(p) {
-				return getDist(coords.latitude, coords.longitude, p.latitude, p.longitude);
+			var pt = Turf.point([coords.latitude, coords.longitude]);
+			var line = Turf.lineString(route.points.map(function(p) {
+				return [p.latitude, p.longitude];
+			}));
+			var distance = Turf.pointToLineDistance(pt, line, {
+				units : 'km'
 			});
 			allRoutes.push({
-				dist : Math.min.apply(null, dists),
+				dist : distance,
 				route : route
 			});
 		}
@@ -72,7 +77,7 @@ $.prototype.getNearestRoute = function(coords) {
 		description : allRoutes[0].route.meta.description,
 		dist : allRoutes[0].dist
 	};
-	console.log(allRoutes[0].dist + '   '+ allRoutes[1].dist)
+	console.log(allRoutes[0].dist + '   ' + allRoutes[1].dist)
 	return nearestRoute;
 
 };
