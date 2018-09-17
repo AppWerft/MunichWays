@@ -1,29 +1,7 @@
-function getDist(lat1, lng1, lat2, lng2) {
-	const R = 6371000;
-	var φ1 = parseFloat(lat1).toRadians();
-	var φ2 = parseFloat(lat2).toRadians();
-	var Δφ = parseFloat(lat1 - lat2).toRadians();
-	var Δλ = parseFloat(lng2 - lng1).toRadians();
-	var a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) + Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
-	return 2 * R * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-}
-
-/** Extend Number object with method to convert numeric degrees to radians */
-if (Number.prototype.toRadians === undefined) {
-	Number.prototype.toRadians = function() {
-		return this * Math.PI / 180;
-	};
-}
-
-/** Extend Number object with method to convert radians to numeric (signed) degrees */
-if (Number.prototype.toDegrees === undefined) {
-	Number.prototype.toDegrees = function() {
-		return this * 180 / Math.PI;
-	};
-}
-
 var $ = function() {
 	this.routes = [];
+	this.Routes = {};
+	this.activeRoute = null;
 	var that = this;
 	require('data/routes').forEach(function(item, iindex) {
 		const GEO = JSON.parse(Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory, "data", "geojson", item.file + ".geojson").read().getText());
@@ -40,7 +18,7 @@ var $ = function() {
 				const route = {
 					id : iindex + '_' + findex,
 					meta : {
-						name : feature.properties.Name.replace('rot_', '').replace('gelb_', '').replace('grün_', ''),
+						name : feature.properties.Name.replace('rot_', '').replace('gelb_', '').replace('grün_', '').replace('_', ' '),
 						description : feature.properties.description
 					},
 					points : points,
@@ -60,7 +38,7 @@ $.prototype.getNearestRoute = function(coords) {
 
 		if (route.points.length) {
 			var dists = [];
-			const turf = require('libs/turf');
+			const turf = require('org.turf');
 			var point = turf.point([coords.latitude, coords.longitude]);
 			var line = turf.lineString(route.points.map(function(p) {
 				return [p.latitude, p.longitude];
@@ -76,24 +54,30 @@ $.prototype.getNearestRoute = function(coords) {
 			});
 		}
 	});
-
 	allRoutes.sort(function(a, b) {
-		return b.distance - a.distance;
+		return a.distance - b.distance;
 	});
-	console.log(allRoutes[0].distance + '   ' + allRoutes[1].distance + '   ' + allRoutes[2].distance);
-	const nearestRoute = allRoutes[0];
 	return allRoutes.shift();
 };
 
 $.prototype.addAllToMap = function(map) {
-
+	var that=this;
 	this.routes.forEach(function(route) {
-		map.addRoute(TiMap.createRoute({
+		that.Routes[route.id] = TiMap.createRoute({
 			points : route.points,
 			color : route.color,
-			width : 10
-		}));
+			width : 10,
+			id : route.id
+		});
+		map.addRoute(that.Routes[route.id]);
 	});
 };
+
+$.prototype.selectRoute= function(id){
+	if (this.activeRoute) this.Routes[this.activeRoute].width=10;
+	this.activeRoute=id;
+	this.Routes[this.activeRoute].width=20;
+};
+
 
 module.exports = $;

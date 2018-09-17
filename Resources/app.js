@@ -41,8 +41,9 @@ function onLocationChanged(e) {
 		longitude : coords.longitude
 	});
 	var nearestRoute = Routes.getNearestRoute(coords);
+
 	$.hintText.setText(nearestRoute.name + ' (' + Math.round(nearestRoute.distance) + 'm)');
-	if (nearestRoute.distance > 1000) {
+	if (nearestRoute.distance > 500) {
 		$.hintView.animate({
 			bottom : -100
 		});
@@ -56,24 +57,26 @@ var Routes = new RouteModule();
 Routes.addAllToMap($.mapView);
 $.hintView = Ti.UI.createView({
 	height : 50,
-	backgroundColor : 'rgb(51, 153, 255)',
+	backgroundColor : 'rgb(100,51, 153, 255)',
 	bottom : -100
 });
 $.hintView.add(Ti.UI.createLabel({
-	
-	left:0,top:5,color:'black',
-	textAlign:'left',
-	eidth:Ti.UI.FILL,
-	text: 'Nächster Radlweg:',
+
+	left : 3,
+	top : 0,
+	color : 'black',
+	textAlign : 'left',
+	width : Ti.UI.FILL,
+	text : 'Nächster Radlweg:',
 	font : {
-		fontSize : 10
+		fontSize : 10,fontStyle:'italic'
 	}
 }));
 $.hintText = Ti.UI.createLabel({
 	color : 'white',
 	font : {
 		fontSize : 20,
-		fontWeight: 'bold'
+		fontWeight : 'bold'
 	}
 });
 $.hintView.add($.hintText);
