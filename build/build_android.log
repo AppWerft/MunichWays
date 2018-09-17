@@ -1,5 +1,5 @@
 
-2018-9-17 15:09:05
+2018-9-17 17:15:34
 
 Operating System
   Name                        = Mac OS X
@@ -21,7 +21,7 @@ Titanium SDK
   Target Platform             = android
 
 Command
-  /usr/local/bin/node /Users/fuerst/.appcelerator/install/7.0.2/package/node_modules/titanium/lib/titanium.js build --platform android --log-level trace --sdk 7.1.0.GA --project-dir /Users/fuerst/Documents/MLearning/MunichWays --target device --android-sdk  --device-id NB1GAD27B0201898 --alias googlekey --keystore /Users/fuerst/.android.keystore --store-password *MHpsNH --no-colors --no-progress-bars --no-prompt --prompt-type socket-bundle --prompt-port 61042 --config-file /var/folders/dp/_57t8_6j247dh0h7mknf97600000gn/T/build-1537189742010.json --no-banner --project-dir /Users/fuerst/Documents/MLearning/MunichWays
+  /usr/local/bin/node /Users/fuerst/.appcelerator/install/7.0.2/package/node_modules/titanium/lib/titanium.js build --platform android --log-level trace --sdk 7.1.0.GA --project-dir /Users/fuerst/Documents/MLearning/MunichWays --target device --android-sdk  --device-id NB1GAD27B0201898 --alias googlekey --keystore /Users/fuerst/.android.keystore --store-password *MHpsNH --no-colors --no-progress-bars --no-prompt --prompt-type socket-bundle --prompt-port 61042 --config-file /var/folders/dp/_57t8_6j247dh0h7mknf97600000gn/T/build-1537197331451.json --no-banner --project-dir /Users/fuerst/Documents/MLearning/MunichWays
 
 [WARN]   Building with Android SDK API 27 which hasn't been tested against Titanium SDK 7.1.0
 [DEBUG]  Detecting modules in /Users/fuerst/Documents/MLearning/MunichWays/modules
@@ -900,8 +900,6 @@ Command
 [DEBUG]  Module com.alcoapps.actionbarextras has apiversion=2, but the selected SDK supports module apiversion=4 on platform=android
 [DEBUG]  Found incompatible Titanium module id=com.alcoapps.actionbarextras version=1.6.1 platform=android api-version=2 deploy-type=test
 [DEBUG]  Module com.alcoapps.actionbarextras has apiversion=2, but the selected SDK supports module apiversion=4 on platform=android
-[DEBUG]  Looking for Titanium module id=org.turf version=latest platform=commonjs deploy-type=test
-[INFO]   Found Titanium module id=org.turf version=5.0.0 platform=commonjs deploy-type=test path=/Users/fuerst/Documents/MLearning/MunichWays/modules/commonjs/org.turf/5.0.0
 [DEBUG]  Looking for Titanium module id=ti.map version=latest platform=android deploy-type=test
 [INFO]   Found Titanium module id=ti.map version=3.0.1 platform=android deploy-type=test path=/Users/fuerst/Documents/MLearning/MunichWays/modules/android/ti.map/3.0.1
 [DEBUG]  Found incompatible Titanium module id=ti.map version=2.5.0 platform=android api-version=2 deploy-type=test
@@ -929,8 +927,6 @@ Command
 [DEBUG]  Module com.alcoapps.actionbarextras has apiversion=2, but the selected SDK supports module apiversion=4 on platform=android
 [DEBUG]  Found incompatible Titanium module id=com.alcoapps.actionbarextras version=1.6.1 platform=android api-version=2 deploy-type=test
 [DEBUG]  Module com.alcoapps.actionbarextras has apiversion=2, but the selected SDK supports module apiversion=4 on platform=android
-[DEBUG]  Looking for Titanium module id=org.turf version=latest platform=commonjs deploy-type=test
-[INFO]   Found Titanium module id=org.turf version=5.0.0 platform=commonjs deploy-type=test path=/Users/fuerst/Documents/MLearning/MunichWays/modules/commonjs/org.turf/5.0.0
 [DEBUG]  Looking for Titanium module id=ti.playservices version=latest platform=android deploy-type=test
 [INFO]   Found Titanium module id=ti.playservices version=11.0.40 platform=android deploy-type=test path=/Users/fuerst/Library/Application Support/Titanium/modules/android/ti.playservices/11.0.40
 [DEBUG]  No project level plugins to load
@@ -967,8 +963,10 @@ Command
 [TRACE]  /Users/fuerst/Library/Application Support/Titanium/modules/android/ti.playservices/11.0.40/lib/play-services-tasks-11.0.4.aar has not changed since last built, skipping transform task.
 [TRACE]  /Users/fuerst/Library/Application Support/Titanium/modules/android/ti.playservices/11.0.40/lib/play-services-wallet-11.0.4.aar has not changed since last built, skipping transform task.
 [TRACE]  offline build file /var/folders/dp/_57t8_6j247dh0h7mknf97600000gn/T/build-96dbaae059e34c4bfeae81e77fc445e661dfeda6.json
-[TRACE]  online 0
-[TRACE]  offline file {"key":"4WDidw5Ns3vGQxGI03EDow==","pepper":"WxOjQw9ZBo5MFLpbLj5mIw==","hmacKey":"oIKBf0v35LjzYHD0N0O05A==","o":100001896,"u":"128f7fa0-a54c-43c4-ba7d-7681dceb4c15","p":"starter","i":"5b9fa5c0ea2c5d255650f1e4","success":true,"url":"https://platform.axway.com/api/v1/app/verify","username":"rainer@schleevoigt.com","timestamp":1537189312946,"offline":true,"skipped":true}, age=433689
+[TRACE]  online 1
+[TRACE]  sending request {"json":{"username":"rainer@schleevoigt.com","session":"a25e3ed175cb8da4ddb5d96098f929b47b3884d2 A0o2COMXhWfhBgKIzGmuJXij12m/MGMp2VTS6pLW728t4omfchc3rXWR092X01RTktMoGDJwjgIUeCYO0Yqi8UPVSHvo2Q8/Zv9vt38SBYeHQRpTwg67BZlzHippZjIDlFZTYbouMMuezxlOMvtlqKrnOpxJrAki3SkzMJRpcWh9CZUgBfk6bXtHveAApGbE69R8Oa5O3dbb23sq9k4oPgtIi/LwlNFOivXv0AKeCTnzCPvjR49NQQc3P/osqrnRKnPV2IFiIKSIPa3lWbPMRhhnjiaO1jgo0SdoY2EVBHDcKDbEApD54tG+KeEtTLVdcgzLSx6arLD1VMuMWUvqx173dNQdOs+Wc/3ejQHDNSRJmfp28auypxR1gk5gWzpkSD5DCnvxNCmeOrS2yMp7YoYO2416B8+/X1AsRTmoQwjLxeb5rJJx26v/YuHr0yxJbYIeGkn5LSAQEJXhaMUbywaVyufmbSYmMgI8ovfdGfA8ry17NxjjbVfYXiUSP2UmWUToUzvrpfL1q8C01KV+u5fmQdYl4I5trEDATXLYF9EpPUD9Cgo4iy0GUKZb/FIPNNUsDEf6nKjtiILW45S2VZC+ax5m1aoUpKdeduLGnu8A5nTMvI7g48J3AH7Fb0WUfjkCjzNkFvefmsJaXVnJrhTwbYFa8BE0QK/4Nq+PfwDNf1aYfbBF9Ulki1Xb+UVhL5vgdsI7I/bAdIrlatcqImDWLsb+Zz01mS2s/lT/X9I=","ipaddress":"192.168.43.69","fingerprint":"4303cd0fd20903a64e54c64b5231e113192e67bf","fingerprint_description":"Mac OSX Serial Number: C02T51UDGTDY","guid":"19e10ae6-cc5a-409a-9fff-f89dc354b2b4","appid":"de.appwerft.munichways","name":"munichways","org_id":100001896,"deploytype":"test","tiappxml":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<ti:app \n  xmlns:ti=\"http://ti.appcelerator.org\">\n  <id>de.appwerft.munichways</id>\n  <name>munichways</name>\n  <version>1.0</version>\n  <publisher>fuerst</publisher>\n  <url/>\n  <description>undefined</description>\n  <copyright>2018 by fuerst@Hamburg</copyright>\n  <icon>appicon.png</icon>\n  <fullscreen>false</fullscreen>\n  <navbar-hidden>false</navbar-hidden>\n  <statusbar-hidden>false</statusbar-hidden>\n  <analytics>false</analytics>\n  <guid>19e10ae6-cc5a-409a-9fff-f89dc354b2b4</guid>\n  <property name=\"ti.ui.defaultunit\" type=\"string\">dp</property>\n  <property name=\"run-on-main-thread\" type=\"bool\">***</property>\n  <ios>\n    <enable-launch-screen-storyboard>true</enable-launch-screen-storyboard>\n    <use-app-thinning>true</use-app-thinning>\n    <plist>\n      <dict>\n        <key>UISupportedInterfaceOrientations~iphone</key>\n        <array>\n          <string>UIInterfaceOrientationPortrait</string>\n        </array>\n        <key>UISupportedInterfaceOrientations~ipad</key>\n        <array>\n          <string>UIInterfaceOrientationPortrait</string>\n          <string>UIInterfaceOrientationPortraitUpsideDown</string>\n          <string>UIInterfaceOrientationLandscapeLeft</string>\n          <string>UIInterfaceOrientationLandscapeRight</string>\n        </array>\n        <key>UIRequiresPersistentWiFi</key>\n        <false/>\n        <key>UIPrerenderedIcon</key>\n        <false/>\n        <key>UIStatusBarHidden</key>\n        <false/>\n        <key>UIStatusBarStyle</key>\n        <string>UIStatusBarStyleDefault</string>\n      </dict>\n    </plist>\n  </ios>\n  <android \n    xmlns:android=\"http://schemas.android.com/apk/res/android\"/>\n    <modules>\n      <module platform=\"iphone\">ti.map</module>\n      <module platform=\"android\">ti.map</module>\n      <module platform=\"android\">com.alcoapps.actionbarextras</module>\n    </modules>\n    <deployment-targets>\n      <target device=\"android\">true</target>\n      <target device=\"ipad\">false</target>\n      <target device=\"iphone\">true</target>\n    </deployment-targets>\n    <sdk-version>7.1.0.GA</sdk-version>\n    <property name=\"appc-app-id\" type=\"string\">5b9d2f82ea2c5d255650deb1</property>\n  </ti:app>","modules":[{"id":"ti.map","platform":["android"],"deployType":["test"],"modulePath":"/Users/fuerst/Library/Application Support/Titanium/modules/android/ti.map/4.1.1","version":"4.1.1","manifest":{"version":"4.1.1","apiversion":"4","architectures":"arm64-v8a armeabi-v7a x86","description":"External version of Map module to support new Google Map v2 sdk","author":"Hieu Pham","license":"Apache Public License v2","copyright":"Copyright (c) 2013-2017 by Axway, Inc.","name":"map","moduleid":"ti.map","guid":"f0d8fd44-86d2-4730-b67d-bd454577aeee","platform":"android","minsdk":"7.0.0","respackage":"com.google.android.gms"},"native":true,"jarName":"map.jar","jarFile":"/Users/fuerst/Library/Application Support/Titanium/modules/android/ti.map/4.1.1/map.jar","hash":"38d7553c07111b4e59b77239ea4282e2","abis":["arm64-v8a","armeabi-v7a","x86"]},{"id":"com.alcoapps.actionbarextras","platform":["android"],"deployType":["test"],"modulePath":"/Library/Application Support/Titanium/modules/android/com.alcoapps.actionbarextras/2.0.0","version":"2.0.0","manifest":{"version":"2.0.0","apiversion":"4","architectures":"arm64-v8a armeabi-v7a x86","description":"Allows to set extra properties on the ActionBar","author":"Ricardo Alcocer","license":"MIT License - http://alco.mit-license.org","copyright":"2013","name":"actionbarextras","moduleid":"com.alcoapps.actionbarextras","guid":"84008311-4ed7-45ba-b2ea-a4cb5b5bb692","platform":"android","minsdk":"7.0.0","respackage":"com.alcoapps.actionbarextras"},"native":true,"jarName":"actionbarextras.jar","jarFile":"/Library/Application Support/Titanium/modules/android/com.alcoapps.actionbarextras/2.0.0/actionbarextras.jar","hash":"6914bbe01889a181099b38f758780276","abis":["arm64-v8a","armeabi-v7a","x86"]},{"id":"ti.playservices","version":"11.0.40","platform":["android"],"deployType":["test"],"modulePath":"/Users/fuerst/Library/Application Support/Titanium/modules/android/ti.playservices/11.0.40","manifest":{"version":"11.0.40","apiversion":"4","architectures":"arm64-v8a armeabi-v7a x86","description":"Titanium Google Play Services module.","license":"Apache Public License v2","copyright":"Copyright (c) 2017 by Axway Appcelerator","name":"playservices","moduleid":"ti.playservices","guid":"32184149-411f-436b-92a8-c6ddb98a5fb6","platform":"android","minsdk":"7.0.0"},"native":true,"jarName":"playservices.jar","jarFile":"/Users/fuerst/Library/Application Support/Titanium/modules/android/ti.playservices/11.0.40/playservices.jar","hash":"f169222a5f59991d899cd8b014d0be57","abis":["arm64-v8a","armeabi-v7a","x86"]}]},"gzip":true,"followAllRedirects":true,"url":"https://platform.axway.com/api/v1/auth/build-verify"}
+[TRACE]  result from /build-verify=> {"key":"l+V/J7h7pnKNq0iRE+/11Q==","pepper":"W3t/3gANLxaUK+LzEWHMTg==","hmacKey":"qANxWEqbuXwPtuz+2XlAIg==","o":100001896,"u":"128f7fa0-a54c-43c4-ba7d-7681dceb4c15","p":"starter","i":"5b9fc519d60b632566232d79","success":true}, err=null
+[INFO]   JavaScript files need to be encrypted
 [DEBUG]  Copying /Users/fuerst/Documents/MLearning/MunichWays/Resources
 [DEBUG]  Ignoring /Users/fuerst/Documents/MLearning/MunichWays/Resources/.DS_Store
 [DEBUG]  Ignoring /Users/fuerst/Documents/MLearning/MunichWays/Resources/android
@@ -1015,14 +1013,6 @@ Command
 [WARN]   Overwriting file /Users/fuerst/Documents/MLearning/MunichWays/build/android/bin/assets/Resources/calendar.png
 [DEBUG]  Symlinking /Users/fuerst/Documents/MLearning/MunichWays/Resources/android/calendar.png => /Users/fuerst/Documents/MLearning/MunichWays/build/android/bin/assets/Resources/calendar.png
 [DEBUG]  Symlinking /Users/fuerst/Documents/MLearning/MunichWays/Resources/android/default.png => /Users/fuerst/Documents/MLearning/MunichWays/build/android/res/drawable/background.png
-[DEBUG]  Copying /Users/fuerst/Documents/MLearning/MunichWays/modules/commonjs/org.turf/5.0.0
-[WARN]   Overwriting file /Users/fuerst/Documents/MLearning/MunichWays/build/android/bin/assets/Resources/org.turf/LICENSE
-[DEBUG]  Symlinking /Users/fuerst/Documents/MLearning/MunichWays/modules/commonjs/org.turf/5.0.0/LICENSE => /Users/fuerst/Documents/MLearning/MunichWays/build/android/bin/assets/Resources/org.turf/LICENSE
-[WARN]   Overwriting file /Users/fuerst/Documents/MLearning/MunichWays/build/android/bin/assets/Resources/org.turf/manifest
-[DEBUG]  Symlinking /Users/fuerst/Documents/MLearning/MunichWays/modules/commonjs/org.turf/5.0.0/manifest => /Users/fuerst/Documents/MLearning/MunichWays/build/android/bin/assets/Resources/org.turf/manifest
-[WARN]   Overwriting file /Users/fuerst/Documents/MLearning/MunichWays/build/android/bin/assets/Resources/org.turf/package.json
-[DEBUG]  Symlinking /Users/fuerst/Documents/MLearning/MunichWays/modules/commonjs/org.turf/5.0.0/package.json => /Users/fuerst/Documents/MLearning/MunichWays/build/android/bin/assets/Resources/org.turf/package.json
-[DEBUG]  Copying /Users/fuerst/Documents/MLearning/MunichWays/modules/commonjs/org.turf/5.0.0/assets
 [DEBUG]  Copying /Library/Application Support/Titanium/modules/android/com.alcoapps.actionbarextras/2.0.0/platform/android/res/layout/actionbar_centered_logo_layout.xml => /Users/fuerst/Documents/MLearning/MunichWays/build/android/res/layout/actionbar_centered_logo_layout.xml
 [DEBUG]  Copying /Library/Application Support/Titanium/modules/android/com.alcoapps.actionbarextras/2.0.0/platform/android/res/layout/actionbar_centered_logo_layout.xml => /Users/fuerst/Documents/MLearning/MunichWays/build/android/res/layout/actionbar_centered_logo_layout.xml
 [DEBUG]  Ignoring /Users/fuerst/Documents/MLearning/MunichWays/platform/android/.DS_Store
@@ -1031,10 +1021,10 @@ Command
 [WARN]   Please check for possible duplicate resources.
 [DEBUG]  Symlinking /Users/fuerst/Documents/MLearning/MunichWays/build/android/bin/assets/Resources/appicon.png => /Users/fuerst/Documents/MLearning/MunichWays/build/android/res/drawable/appicon.png
 [INFO]   Processing JavaScript files
-[DEBUG]  Writing modified contents to /Users/fuerst/Documents/MLearning/MunichWays/build/android/bin/assets/Resources/app.js
-[DEBUG]  Writing modified contents to /Users/fuerst/Documents/MLearning/MunichWays/build/android/bin/assets/Resources/calendar.window.js
-[DEBUG]  Writing modified contents to /Users/fuerst/Documents/MLearning/MunichWays/build/android/bin/assets/Resources/control/calendar.js
-[DEBUG]  Writing modified contents to /Users/fuerst/Documents/MLearning/MunichWays/build/android/bin/assets/Resources/control/routes.js
-[DEBUG]  Writing modified contents to /Users/fuerst/Documents/MLearning/MunichWays/build/android/bin/assets/Resources/data/routes.js
-[DEBUG]  Writing modified contents to /Users/fuerst/Documents/MLearning/MunichWays/build/android/bin/assets/Resources/libs/checkPermissions.js
-[DEBUG]  Writing modified contents to /Users/fuerst/Documents/MLearning/MunichWays/build/android/bin/assets/Resources/libs/moment.js
+[DEBUG]  Writing modified contents to /Users/fuerst/Documents/MLearning/MunichWays/build/android/assets/app.js
+[DEBUG]  Writing modified contents to /Users/fuerst/Documents/MLearning/MunichWays/build/android/assets/calendar.window.js
+[DEBUG]  Writing modified contents to /Users/fuerst/Documents/MLearning/MunichWays/build/android/assets/control/calendar.js
+[DEBUG]  Writing modified contents to /Users/fuerst/Documents/MLearning/MunichWays/build/android/assets/control/routes.js
+[DEBUG]  Writing modified contents to /Users/fuerst/Documents/MLearning/MunichWays/build/android/assets/data/routes.js
+[DEBUG]  Writing modified contents to /Users/fuerst/Documents/MLearning/MunichWays/build/android/assets/libs/checkPermissions.js
+[DEBUG]  Writing modified contents to /Users/fuerst/Documents/MLearning/MunichWays/build/android/assets/libs/moment.js

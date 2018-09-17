@@ -1,20 +1,20 @@
-const Map = require('ti.map'),
-    abx = require('com.alcoapps.actionbarextras');
-RouteModule = require('/control/routes');
+const TiMap = require('ti.map'),
+    abx = require('com.alcoapps.actionbarextras'),
+    RouteModule = require('/control/routes');
 
 var $ = Ti.UI.createWindow({
 	exitOnClose : true
 });
 
-$.mapView = Map.createView({
+$.mapView = TiMap.createView({
 	userLocation : false, //Ti.Geolocation.locationServicesEnabled ? true : false,
 	region : {
-		latitude : 48.1247925,
-		longitude : 11.5583832,
+		latitude : 48.14,
+		longitude : 11.5652,
 		longitudeDelta : 0.05,
 		latitudeDelta : 0.05
 	},
-	mapType : Map.NORMAL_TYPE,
+	mapType : TiMap.NORMAL_TYPE,
 	mapToolbarEnabled : false,
 	style : Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory, "data", "mapstyle.json").read().getText(),
 	routes : {},
@@ -27,11 +27,11 @@ function onLocationChanged(e) {
 	var coords = e.coords;
 	if (!coords) {
 		return;
-	}	
-	const R = 0.05;
+	}
+	const R = 0.02;
 	if (coords.latitude > 53.0) {// Mock in HH to Stachus
-		coords.latitude = 48.1490796 + Math.random() * R - R / 2;
-		coords.longitude = 11.4587669 + Math.random() * R - R / 2;
+		coords.latitude = 48.134 + Math.random() * R - R / 2;
+		coords.longitude = 11.5652 + Math.random() * R - R / 2;
 	}
 	$.mapView.setLocation({
 		animate : true,
@@ -41,22 +41,41 @@ function onLocationChanged(e) {
 		longitude : coords.longitude
 	});
 	var nearestRoute = Routes.getNearestRoute(coords);
-	console.log(nearestRoute);
-	$.hintText.setText(nearestRoute.name+ ' ('+Math.round(nearestRoute.dist)+'m)');
-	
-	if(nearestRoute.dist>10000) {
-		$.hintView.animate({bottom:-100});
-	} else $.hintView.animate({bottom:0});
+	$.hintText.setText(nearestRoute.name + ' (' + Math.round(nearestRoute.distance) + 'm)');
+	if (nearestRoute.distance > 1000) {
+		$.hintView.animate({
+			bottom : -100
+		});
+	} else
+		$.hintView.animate({
+			bottom : 0
+		});
 }
 
 var Routes = new RouteModule();
 Routes.addAllToMap($.mapView);
 $.hintView = Ti.UI.createView({
-	height:50,
-	backgroundColor:'white',
-	bottom: -100
+	height : 50,
+	backgroundColor : 'rgb(51, 153, 255)',
+	bottom : -100
 });
-$.hintText = Ti.UI.createLabel({color:'black',font:{fontSize:20}});
+$.hintView.add(Ti.UI.createLabel({
+	
+	left:0,top:5,color:'black',
+	textAlign:'left',
+	eidth:Ti.UI.FILL,
+	text: 'Nächster Radlweg:',
+	font : {
+		fontSize : 10
+	}
+}));
+$.hintText = Ti.UI.createLabel({
+	color : 'white',
+	font : {
+		fontSize : 20,
+		fontWeight: 'bold'
+	}
+});
 $.hintView.add($.hintText);
 $.add($.hintView);
 

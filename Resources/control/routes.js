@@ -8,8 +8,6 @@ function getDist(lat1, lng1, lat2, lng2) {
 	return 2 * R * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
-const Turf = require('org.turf');
-
 /** Extend Number object with method to convert numeric degrees to radians */
 if (Number.prototype.toRadians === undefined) {
 	Number.prototype.toRadians = function() {
@@ -29,23 +27,28 @@ var $ = function() {
 	var that = this;
 	require('data/routes').forEach(function(item, iindex) {
 		const GEO = JSON.parse(Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory, "data", "geojson", item.file + ".geojson").read().getText());
-		GEO.features.forEach(function(f, findex) {
-			const points = f.geometry.coordinates.map(function(c) {
-				return {
-					latitude : c[1],
-					longitude : c[0]
-				};
+		GEO.features.forEach(function(feature, findex) {
+			const points = [];
+			feature.geometry.coordinates.forEach(function(c) {
+				if (c[0] && c[1] != null)
+					points.push({
+						latitude : parseFloat(c[1]),
+						longitude : parseFloat(c[0])
+					});
 			});
-			if (points.length > 1)
-				that.routes.push({
+			if (points.length > 2) {
+				const route = {
 					id : iindex + '_' + findex,
 					meta : {
-						name : f.properties.Name,
-						description : f.properties.description
+						name : feature.properties.Name.replace('rot_', '').replace('gelb_', '').replace('grün_', ''),
+						description : feature.properties.description
 					},
 					points : points,
 					color : item.color
-				});
+				};
+
+				that.routes.push(route);
+			}
 		});
 	});
 
@@ -54,40 +57,41 @@ var $ = function() {
 $.prototype.getNearestRoute = function(coords) {
 	var allRoutes = [];
 	this.routes.forEach(function(route) {
+
 		if (route.points.length) {
 			var dists = [];
-			var pt = Turf.point([coords.latitude, coords.longitude]);
-			var line = Turf.lineString(route.points.map(function(p) {
+			const turf = require('libs/turf');
+			var point = turf.point([coords.latitude, coords.longitude]);
+			var line = turf.lineString(route.points.map(function(p) {
 				return [p.latitude, p.longitude];
 			}));
-			var distance = Turf.pointToLineDistance(pt, line, {
-				units : 'km'
+			var distance = turf.pointToLineDistance(point, line, {
+				units : 'meters'
 			});
 			allRoutes.push({
-				dist : distance,
-				route : route
+				distance : parseFloat(distance),
+				name : route.meta.name,
+				description : route.meta.description,
+				id : route.meta.id
 			});
 		}
 	});
-	allRoutes.sort(function(a, b) {
-		return a.dist < b.dist;
-	});
-	const nearestRoute = {
-		name : allRoutes[0].route.meta.name,
-		description : allRoutes[0].route.meta.description,
-		dist : allRoutes[0].dist
-	};
-	console.log(allRoutes[0].dist + '   ' + allRoutes[1].dist)
-	return nearestRoute;
 
+	allRoutes.sort(function(a, b) {
+		return b.distance - a.distance;
+	});
+	console.log(allRoutes[0].distance + '   ' + allRoutes[1].distance + '   ' + allRoutes[2].distance);
+	const nearestRoute = allRoutes[0];
+	return allRoutes.shift();
 };
 
 $.prototype.addAllToMap = function(map) {
+
 	this.routes.forEach(function(route) {
-		map.addRoute(Map.createRoute({
+		map.addRoute(TiMap.createRoute({
 			points : route.points,
 			color : route.color,
-			width : 8
+			width : 10
 		}));
 	});
 };
