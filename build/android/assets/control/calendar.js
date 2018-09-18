@@ -1,5 +1,7 @@
 const Moment=require('libs/moment'),
+iCAL=require('libs/ical'),
 CALENDAR='CALENDAR_FEED';
+
 
 module.exports=function(cb){
 const URL='https://www.munichways.com/?plugin=all-in-one-event-calendar&controller=ai1ec_exporter_controller&action=export_events&xml=true';

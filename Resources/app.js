@@ -108,6 +108,6 @@ $.activity.onCreateOptionsMenu = function(e) {
 		}
 	});
 	$.addEventListener('close', onLocationChanged);
-	require('control/calendar')();
+	$.mapView.addEventListener('load',require('control/calendar'));
 };
 $.open();

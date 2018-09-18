@@ -1,3 +1,5 @@
+const LDF=Ti.Platform.displayCaps.logicalDensityFactor;
+
 var $=function(){
 this.routes=[],
 this.Routes={},
@@ -66,7 +68,7 @@ this.routes.forEach(function(route){
 that.Routes[route.id]=TiMap.createRoute({
 points:route.points,
 color:route.color,
-width:10}),
+width:2*LDF}),
 
 map.addRoute(that.Routes[route.id]);
 });
@@ -74,10 +76,10 @@ map.addRoute(that.Routes[route.id]);
 
 $.prototype.selectRoute=function(id){
 this.activeRoute&&(
-this.Routes[this.activeRoute].width=10),
+this.Routes[this.activeRoute].width=2*LDF),
 this.activeRoute=id,
 console.log(id),
-this.Routes[id]&&this.Routes[id].setWidth(30);
+this.Routes[id]&&this.Routes[id].setWidth(5*LDF);
 },
 
 module.exports=$;

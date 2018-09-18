@@ -108,6 +108,6 @@ alert('So, im Falle der Verweigerung funktioniert die App nicht. Schade.');
 }}),
 
 $.addEventListener('close',onLocationChanged),
-require('control/calendar')();
+$.mapView.addEventListener('load',require('control/calendar'));
 },
 $.open();
