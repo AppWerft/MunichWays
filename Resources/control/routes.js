@@ -1,10 +1,11 @@
-const  LDF = Ti.Platform.displayCaps.logicalDensityFactor;
+const LDF = Ti.Platform.displayCaps.logicalDensityFactor;
 
 var $ = function() {
 	this.routes = [];
 	this.Routes = {};
 	this.activeRoute = null;
 	var that = this;
+	Log('LDF=' + LDF + '    ' + Ti.Platform.displayCaps.density);
 	require('data/routes').forEach(function(item, iindex) {
 		const GEO = JSON.parse(Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory, "data", "geojson", item.file + ".geojson").read().getText());
 		GEO.features.forEach(function(feature, findex) {
@@ -26,7 +27,6 @@ var $ = function() {
 					points : points,
 					color : item.color
 				};
-
 				that.routes.push(route);
 			}
 		});
@@ -37,7 +37,6 @@ var $ = function() {
 $.prototype.getNearestRoute = function(coords) {
 	var allRoutes = [];
 	this.routes.forEach(function(route) {
-
 		if (route.points.length) {
 			var dists = [];
 			const turf = require('org.turf');
@@ -68,18 +67,18 @@ $.prototype.addAllToMap = function(map) {
 		that.Routes[route.id] = TiMap.createRoute({
 			points : route.points,
 			color : route.color,
-			width : LDF*2
+			width : LDF * 2
 		});
-		map.addRoute(that.Routes[route.id]);
+		map && map.addRoute(that.Routes[route.id]);
 	});
 };
 
 $.prototype.selectRoute = function(id) {
 	if (this.activeRoute)
-		this.Routes[this.activeRoute].width = LDF*2;
+		this.Routes[this.activeRoute].width = LDF * 2;
 	this.activeRoute = id;
 	console.log(id);
-	this.Routes[id] && this.Routes[id].setWidth(LDF*		5);
+	this.Routes[id] && this.Routes[id].setWidth(LDF * 5);
 };
 
 module.exports = $;

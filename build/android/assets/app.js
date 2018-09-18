@@ -1,16 +1,26 @@
 const TiMap=require('ti.map'),
+STACHUS=[48.14,11.5652],
 abx=require('com.alcoapps.actionbarextras'),
 RouteModule=require('/control/routes');
+var t=new Date().getTime();
+function Log(foo){
+'object'==typeof foo&&(
+foo=JSON.stringify(foo)),
+console.log(new Date().getTime()-t+'   '+foo),
+t=new Date().getTime();
+}
 
+(function(){
 var $=Ti.UI.createWindow({
 exitOnClose:!0});
 
 
 $.mapView=TiMap.createView({
+userLocationButton:!1,
 userLocation:!1,
 region:{
-latitude:48.14,
-longitude:11.5652,
+latitude:STACHUS[0],
+longitude:STACHUS[1],
 longitudeDelta:0.05,
 latitudeDelta:0.05},
 
@@ -21,17 +31,26 @@ routes:{},
 lifecycleContainer:$,
 enableZoomControls:!1}),
 
-$.add($.mapView);
+Log($.mapView.region),
 
-function onLocationChanged(e){
+$.hintView=require('hintview')(),
+Log('map'),
+$.add($.mapView),
+Log('hint'),
+$.add($.hintView),
+
+$.onLocationChanged=function(e){
 var coords=e.coords;
 if(coords){
 
 
-const R=0.02;
+const R=0.05;
 53<coords.latitude&&(
-coords.latitude=48.134+Math.random()*R-R/2,
-coords.longitude=11.5652+Math.random()*R-R/2),
+coords.latitude=STACHUS[0]+Math.random()*R-R/2,
+coords.longitude=STACHUS[1]+Math.random()*R-R/2),
+
+$.radPin.latitude=coords.latitude,
+$.radPin.longitude=coords.longitude,
 
 $.mapView.setLocation({
 animate:!0,
@@ -41,73 +60,36 @@ latitude:coords.latitude,
 longitude:coords.longitude});
 
 var nearestRoute=Routes.getNearestRoute(coords);
+$.hintView.disableDetails(),
+$.hintView.hintText.setText(nearestRoute.name+' ('+Math.round(nearestRoute.distance)+'m)'),
+500>nearestRoute.distance?
+$.hintView.showHint():
 
-$.hintText.setText(nearestRoute.name+' ('+Math.round(nearestRoute.distance)+'m)'),
-500<nearestRoute.distance?
-$.hintView.animate({
-bottom:-100}):
+$.hintView.hideHint(),
+Routes.selectRoute(nearestRoute.id),
+null==nearestRoute.description?
 
 
-$.hintView.animate({
-bottom:0}),
+$.hintView.disableDetails():$.hintView.enableDetails(nearestRoute.description)}
 
-Routes.selectRoute(nearestRoute.id)}
-}
+
+};
 
 var Routes=new RouteModule;
 Routes.addAllToMap($.mapView),
-$.hintView=Ti.UI.createView({
-height:50,
-backgroundColor:'rgb(51, 153, 255)',
-opacity:0.8,
-bottom:-100}),
 
-$.hintView.add(Ti.UI.createLabel({
+$.addEventListener('open',require('onOpen')),
 
-left:3,
-top:0,
-color:'black',
-textAlign:'left',
-width:Ti.UI.FILL,
-text:'N\xE4chster Radlweg:',
-font:{
-fontSize:10,fontStyle:'italic'}})),
+$.radPin=TiMap.createAnnotation({
+image:'/images/rad.png',
+latitude:STACHUS[0],
+longitude:STACHUS[1]}),
 
 
-$.hintText=Ti.UI.createLabel({
-color:'white',
-font:{
-fontSize:20,
-fontWeight:'bold'}}),
-
-
-$.hintView.add($.hintText),
-$.add($.hintView),
-
-$.activity.onCreateOptionsMenu=function(e){
-abx.backgroundColor='rgb(51, 153, 255)',
-abx.subtitle='Radlwege in M\xFCnchen',
-abx.statusbarColor='rgb(26, 77, 127)';
-var menu=e.menu;
-const menuItem=menu.add({
-title:'Kalender',
-icon:'/calendar.png',
-showAsAction:Ti.Android.SHOW_AS_ACTION_IF_ROOM|Ti.Android.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW});
-
-menuItem.addEventListener('click',require('/calendar.window')),
-require('libs/checkPermissions')(['ACCESS_FINE_LOCATION'],{
-onOK:function(e){
-Ti.Geolocation.accuracy=Ti.Geolocation.ACCURACY_BEST,
-Ti.Geolocation.distanceFilter=20,
-Ti.Geolocation.preferredProvider=Ti.Geolocation.PROVIDER_GPS,
-Ti.Geolocation.addEventListener('location',onLocationChanged),
-$.mapView.userLocation=!0;
-},
-onError:function(){
-alert('So, im Falle der Verweigerung funktioniert die App nicht. Schade.');
-}}),
-
-$.addEventListener('close',onLocationChanged),
-$.mapView.addEventListener('load',require('control/calendar'));
-},
+$.mapView.addEventListener('complete',function(){
+require('control/calendar')(),
+$.mapView.addAnnotation($.radPin);
+}),
 $.open();
+
+})();

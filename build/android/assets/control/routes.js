@@ -5,8 +5,9 @@ this.routes=[],
 this.Routes={},
 this.activeRoute=null;
 var that=this;
-require("data/routes").forEach(function(item,iindex){
-const GEO=JSON.parse(Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory,"data","geojson",item.file+".geojson").read().getText());
+Log('LDF='+LDF+'    '+Ti.Platform.displayCaps.density),
+require('data/routes').forEach(function(item,iindex){
+const GEO=JSON.parse(Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory,'data','geojson',item.file+'.geojson').read().getText());
 GEO.features.forEach(function(feature,findex){
 const points=[];
 
@@ -18,14 +19,13 @@ const points=[];
 
 if(feature.geometry.coordinates.forEach(function(c){c[0]&&null!=c[1]&&points.push({latitude:parseFloat(c[1]),longitude:parseFloat(c[0])})}),2<points.length){
 const route={
-id:iindex+"_"+findex,
+id:iindex+'_'+findex,
 meta:{
-name:feature.properties.Name.replace("rot_","").replace("gelb_","").replace("gr\xFCn_","").replace("_"," "),
+name:feature.properties.Name.replace('rot_','').replace('gelb_','').replace('gr\xFCn_','').replace('_',' '),
 description:feature.properties.description},
 
 points:points,
 color:item.color};
-
 
 that.routes.push(route);
 }
@@ -58,8 +58,7 @@ var allRoutes=[];
 
 
 
-
-return this.routes.forEach(function(route){if(route.points.length){var dists=[];const turf=require("org.turf");var point=turf.point([coords.latitude,coords.longitude]),line=turf.lineString(route.points.map(function(p){return[p.latitude,p.longitude]})),distance=turf.pointToLineDistance(point,line,{units:"meters"});allRoutes.push({distance:parseFloat(distance),name:route.meta.name,description:route.meta.description,id:route.id})}}),allRoutes.sort(function(a,b){return a.distance-b.distance}),allRoutes.shift();
+return this.routes.forEach(function(route){if(route.points.length){var dists=[];const turf=require('org.turf');var point=turf.point([coords.latitude,coords.longitude]),line=turf.lineString(route.points.map(function(p){return[p.latitude,p.longitude]})),distance=turf.pointToLineDistance(point,line,{units:'meters'});allRoutes.push({distance:parseFloat(distance),name:route.meta.name,description:route.meta.description,id:route.id})}}),allRoutes.sort(function(a,b){return a.distance-b.distance}),allRoutes.shift();
 },
 
 $.prototype.addAllToMap=function(map){
@@ -70,7 +69,7 @@ points:route.points,
 color:route.color,
 width:2*LDF}),
 
-map.addRoute(that.Routes[route.id]);
+map&&map.addRoute(that.Routes[route.id]);
 });
 },
 
