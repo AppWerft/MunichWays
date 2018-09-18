@@ -48,6 +48,7 @@
         <module platform="android">ti.map</module>
         <module platform="android">com.alcoapps.actionbarextras</module>
         <module platform="commonjs">org.turf</module>
+        <module platform="android">ti.compassview</module>
     </modules>
     <deployment-targets>
         <target device="android">true</target>

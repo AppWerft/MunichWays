@@ -58,7 +58,11 @@ var allRoutes=[];
 
 
 
-return this.routes.forEach(function(route){if(route.points.length){var dists=[];const turf=require('org.turf');var point=turf.point([coords.latitude,coords.longitude]),line=turf.lineString(route.points.map(function(p){return[p.latitude,p.longitude]})),distance=turf.pointToLineDistance(point,line,{units:'meters'});allRoutes.push({distance:parseFloat(distance),name:route.meta.name,description:route.meta.description,id:route.id})}}),allRoutes.sort(function(a,b){return a.distance-b.distance}),allRoutes.shift();
+
+
+
+
+return Log('START getNearestPoint'),this.routes.forEach(function(route){if(route.points.length){var dists=[];const turf=require('org.turf'),point=turf.point([coords.latitude,coords.longitude]),line=turf.lineString(route.points.map(function(p){return[p.latitude,p.longitude]})),snapped=turf.nearestPointOnLine(line,point,{units:'meters'});allRoutes.push({distance:snapped.properties.dist,point:snapped.geometry.coordinates,bearing:turf.bearing(point,snapped.geometry.coordinates),name:route.meta.name,description:route.meta.description,id:route.id})}}),allRoutes.sort(function(a,b){return a.distance-b.distance}),Log(allRoutes[0]),allRoutes.shift();
 },
 
 $.prototype.addAllToMap=function(map){

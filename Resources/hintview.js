@@ -97,6 +97,7 @@ var Hint = function() {
 		$.animate({
 			bottom : -MAX
 		});
+		$.arrow.setText('▲');
 	};
 	$.showHint = function() {
 		$.show();

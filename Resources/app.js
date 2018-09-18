@@ -2,6 +2,7 @@ const TiMap = require('ti.map'),
     STACHUS = [48.14, 11.5652],
     abx = require('com.alcoapps.actionbarextras'),
     RouteModule = require('/control/routes');
+Compass = require("ti.compassview");
 var t = new Date().getTime();
 function Log(foo) {
 	if ( typeof foo == 'object')
@@ -51,7 +52,11 @@ function Log(foo) {
 		}
 		$.radPin.latitude = coords.latitude;
 		$.radPin.longitude = coords.longitude;
-
+		$.compassView && $.compassView.hide();
+		if ($.compassView) {
+			$.remove($.compassView);
+			$.compassView = null;
+		}
 		$.mapView.setLocation({
 			animate : true,
 			latitudeDelta : $.mapView.getRegion().latitudeDelta,
@@ -62,10 +67,33 @@ function Log(foo) {
 		var nearestRoute = Routes.getNearestRoute(coords);
 		$.hintView.disableDetails();
 		$.hintView.hintText.setText(nearestRoute.name + ' (' + Math.round(nearestRoute.distance) + 'm)');
-		if (nearestRoute.distance < 500) {
+		if (nearestRoute.distance < 1000) {
+			$.compassView = Compass.createView({
+				offset : nearestRoute.bearing+90,
+				type : Compass.TYPE_COMPASS,
+				image : '/assets/arrow.png',
+				width : 50,
+				top : 5,
+				left : 5,
+				height : 50,
+				touchEnabled : false,
+				opacity : 0.5,
+				duration : 200
+			});
+			$.compassView.start();
+			$.add($.compassView);
 			$.hintView.showHint();
-		} else
+			if ($.compassView) {
+				Log("setting offset to " + nearestRoute.bearing);
+				$.compassView.setOffset(nearestRoute.bearing+90);
+
+			} else
+				Log('no compassView!! ' + nearestRoute.bearing);
+		} else {
 			$.hintView.hideHint();
+			$.compassView && $.compassView.setOffset(0.0);
+
+		}
 		Routes.selectRoute(nearestRoute.id);
 		if (nearestRoute.description != null) {
 			$.hintView.enableDetails(nearestRoute.description);
@@ -73,6 +101,7 @@ function Log(foo) {
 			$.hintView.disableDetails();
 
 		}
+
 	};
 
 	var Routes = new RouteModule();
@@ -89,6 +118,7 @@ function Log(foo) {
 	$.mapView.addEventListener('complete', function() {
 		require('control/calendar')();
 		$.mapView.addAnnotation($.radPin);
+
 	});
 	$.open();
 
