@@ -13,8 +13,10 @@ function Log(foo) {
 
 (function() {
 	var $ = Ti.UI.createWindow({
-		exitOnClose : true
+		exitOnClose : true,
+		geolocation : false
 	});
+	var focused = false;
 
 	$.mapView = TiMap.createView({
 		userLocationButton : false,
@@ -42,7 +44,7 @@ function Log(foo) {
 
 	$.onLocationChanged = function(e) {
 		var coords = e.coords;
-		if (!coords) {
+		if (!coords || !focused) {
 			return;
 		}
 		const R = 0.05;
@@ -50,13 +52,7 @@ function Log(foo) {
 			coords.latitude = STACHUS[0] + Math.random() * R - R / 2;
 			coords.longitude = STACHUS[1] + Math.random() * R - R / 2;
 		}
-		$.radPin.latitude = coords.latitude;
-		$.radPin.longitude = coords.longitude;
-		$.compassView && $.compassView.hide();
-		if ($.compassView) {
-			$.remove($.compassView);
-			$.compassView = null;
-		}
+
 		$.mapView.setLocation({
 			animate : true,
 			latitudeDelta : $.mapView.getRegion().latitudeDelta,
@@ -64,34 +60,39 @@ function Log(foo) {
 			latitude : coords.latitude,
 			longitude : coords.longitude
 		});
-		var nearestRoute = Routes.getNearestRoute(coords);
-		$.hintView.disableDetails();
-		$.hintView.hintText.setText(nearestRoute.name + ' (' + Math.round(nearestRoute.distance) + 'm)');
-		if (nearestRoute.distance < 1000) {
-			$.compassView = Compass.createView({
-				offset : nearestRoute.bearing+90,
-				type : Compass.TYPE_COMPASS,
-				image : '/assets/arrow.png',
-				width : 50,
-				top : 5,
-				left : 5,
-				height : 50,
-				touchEnabled : false,
-				opacity : 0.5,
-				duration : 200
-			});
-			$.compassView.start();
-			$.add($.compassView);
-			$.hintView.showHint();
-			if ($.compassView) {
-				Log("setting offset to " + nearestRoute.bearing);
-				$.compassView.setOffset(nearestRoute.bearing+90);
+		$.radPin.latitude = coords.latitude;
+		$.radPin.longitude = coords.longitude;
 
-			} else
-				Log('no compassView!! ' + nearestRoute.bearing);
+		var nearestRoute = Routes.getNearestRoute(coords, function(route) {
+			$.mapView.addRoute($.Path = TiMap.createRoute(route));
+		});
+		$.Path && $.mapView.removeRoute($.Path);
+
+		if (nearestRoute.distance < 1000) {
+			/* hintView */
+			$.hintView.disableDetails();
+			$.hintView.hintText.setText(nearestRoute.name + ' (' + Math.round(nearestRoute.distance) + 'm)');
+
+			$.hintView.showHint();
+			
+			if (!$.compassView) {
+				$.compassView = Compass.createView({
+					type : Compass.TYPE_COMPASS,
+					image : '/assets/arrow.png',
+					width : 80,
+					top : 5,
+					left : 5,
+					height : 80,
+					touchEnabled : false,
+					opacity : 0.5,
+					duration : 200
+				});
+				$.add($.compassView);
+				$.compassView.start();
+			}
+			$.compassView.setBearing(nearestRoute.bearing);
 		} else {
 			$.hintView.hideHint();
-			$.compassView && $.compassView.setOffset(0.0);
 
 		}
 		Routes.selectRoute(nearestRoute.id);
@@ -119,6 +120,20 @@ function Log(foo) {
 		require('control/calendar')();
 		$.mapView.addAnnotation($.radPin);
 
+	});
+
+	$.addEventListener('focus', function() {
+		Log('>>>>>>>>>>>>>>>>>>');
+		focused = true;
+		if ($.geolocation) {
+			Ti.Geolocation.removeEventListener('location', $.onLocationChanged);
+			Ti.Geolocation.addEventListener('location', $.onLocationChanged);
+		}
+	});
+	$.addEventListener('blur', function() {
+		Log('<<<<<<<<<<<<<<<<<<');
+		focused = false;
+		Ti.Geolocation.removeEventListener('location', $.onLocationChanged);
 	});
 	$.open();
 

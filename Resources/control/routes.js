@@ -1,11 +1,38 @@
 const LDF = Ti.Platform.displayCaps.logicalDensityFactor;
 
+function getPath(origin, destination, cb) {
+	var URL = 'https://maps.googleapis.com/maps/api/directions/json?mode=walking&origin=ORIGIN&destination=DESTINATION&key=AIzaSyCJf_Jg4AZ-KTcvDklMSJRO7ddiZPM6d_s';
+	const $ = Ti.Network.createHTTPClient({
+		onload : function() {
+			const json = JSON.parse(this.responseText);
+			if (json.status == "OK") {
+				const route = require('libs/polyline').decode(json.routes[0].overview_polyline.points);
+				if (cb && typeof cb == 'function') {
+					cb({
+						points : route.map(function(p) {
+							return {
+								latitude : p[0],
+								longitude : p[1]
+							};
+						}),
+						name : 'path',
+						color : '#08000000',
+						width : 10
+					});
+				}
+			}
+		}
+	});
+	Log(URL.replace('ORIGIN', origin).replace('DESTINATION', destination));
+	$.open('GET', URL.replace('ORIGIN', origin).replace('DESTINATION', destination));
+	$.send();
+}
+
 var $ = function() {
 	this.routes = [];
 	this.Routes = {};
 	this.activeRoute = null;
 	var that = this;
-	Log('LDF=' + LDF + '    ' + Ti.Platform.displayCaps.density);
 	require('data/routes').forEach(function(item, iindex) {
 		const GEO = JSON.parse(Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory, "data", "geojson", item.file + ".geojson").read().getText());
 		GEO.features.forEach(function(feature, findex) {
@@ -34,7 +61,7 @@ var $ = function() {
 
 };
 
-$.prototype.getNearestRoute = function(coords) {
+$.prototype.getNearestRoute = function(coords, cb) {
 	var allRoutes = [];
 	Log('START getNearestPoint');
 	this.routes.forEach(function(route) {
@@ -62,7 +89,9 @@ $.prototype.getNearestRoute = function(coords) {
 		return a.distance - b.distance;
 	});
 	Log(allRoutes[0]);
-	return allRoutes.shift();
+	var route = allRoutes.shift();
+	getPath(coords.latitude + ',' + coords.longitude, route.point[0] + ',' + route.point[1], cb);
+	return route;
 };
 
 $.prototype.addAllToMap = function(map) {
@@ -81,8 +110,7 @@ $.prototype.selectRoute = function(id) {
 	if (this.activeRoute)
 		this.Routes[this.activeRoute].width = LDF * 2;
 	this.activeRoute = id;
-	console.log(id);
-	this.Routes[id] && this.Routes[id].setWidth(LDF * 5);
+		this.Routes[id] && this.Routes[id].setWidth(LDF * 5);
 };
 
 module.exports = $;

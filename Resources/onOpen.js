@@ -21,6 +21,7 @@ module.exports= function(e) {
 		menuItem2.addEventListener('click', require('/calendar.window'));
 		require('libs/checkPermissions')(['ACCESS_FINE_LOCATION'], {
 			onOK : function(e) {
+				$.geolocation=true;
 				Ti.Geolocation.accuracy = Ti.Geolocation.ACCURACY_BEST;
 				Ti.Geolocation.distanceFilter = 20;
 				Ti.Geolocation.preferredProvider = Ti.Geolocation.PROVIDER_GPS;
