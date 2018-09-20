@@ -129,11 +129,13 @@ function Log(foo) {
 			Ti.Geolocation.removeEventListener('location', $.onLocationChanged);
 			Ti.Geolocation.addEventListener('location', $.onLocationChanged);
 		}
+		if ($.compassView) $.compassView.start();
 	});
 	$.addEventListener('blur', function() {
 		Log('<<<<<<<<<<<<<<<<<<');
 		focused = false;
 		Ti.Geolocation.removeEventListener('location', $.onLocationChanged);
+		if ($.compassView) $.compassView.stop();
 	});
 	$.open();
 

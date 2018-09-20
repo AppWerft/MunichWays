@@ -110,7 +110,7 @@ $.prototype.selectRoute=function(id){
 this.activeRoute&&(
 this.Routes[this.activeRoute].width=2*LDF),
 this.activeRoute=id,
-this.Routes[id]&&this.Routes[id].setWidth(5*LDF);
+this.Routes[id]&&this.Routes[id].setWidth(8*LDF);
 },
 
 module.exports=$;
