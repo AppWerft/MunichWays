@@ -2,9 +2,7 @@
 
 <img src="https://github.com/AppWerft/MunichWays/blob/master/screens/Screenshot_20180918-135439.png" width=320 />
 
-<img src="https://github.com/AppWerft/MunichWays/blob/master/screens/Screenshot_20180918-135606.png" width=320 />
-<img src="https://github.com/AppWerft/MunichWays/blob/master/screens/Screenshot_20180918-150730.png" width=320 />
-<img src="https://github.com/AppWerft/MunichWays/blob/master/screens/Screenshot_20180918-150748.png" width=320 />
+<img src="https://github.com/AppWerft/MunichWays/blob/master/screens/Screenshot_20180918-135606.png" width=320 /> <img src="https://github.com/AppWerft/MunichWays/blob/master/screens/Screenshot_20180918-150730.png" width=320 />  <img src="https://github.com/AppWerft/MunichWays/blob/master/screens/Screenshot_20180918-150748.png" width=320 />
 
 Install with: 
 
