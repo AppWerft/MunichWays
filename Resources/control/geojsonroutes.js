@@ -64,13 +64,13 @@ const getColor = function(c) {
 	case "schwarz" :
 		return 'black';
 	case "grün" :
-		return 'green';
+		return '#009900';
 	case "gelb" :
 		return 'yellow';
 	case "rot" :
 		return 'red';
 	default:
-		return "white";
+		return "blue";
 	}
 };
 
@@ -84,7 +84,11 @@ $.prototype.getPolylines = function(Map, url, cb) {
 					Polylines.push(Map.createPolyline({
 						points : feature.geometry.coordinates,
 						color : getColor(feature.properties.farbe),
-						width : 3 * LDF
+						width : 5 * LDF,
+						description : feature.properties.description,
+						name : feature.properties.name	,
+						soll : feature.properties.soll	,
+						ist : feature.properties.ist
 					}));
 					break;
 				case "MultiLineString":
@@ -92,7 +96,8 @@ $.prototype.getPolylines = function(Map, url, cb) {
 						Polylines.push(Map.createPolyline({
 							points : coords,
 							color : getColor(feature.properties.farbe),
-							width : 3 * LDF
+							width : 5 * LDF,
+							description : feature.properties.description
 						}));
 					});
 					break;
