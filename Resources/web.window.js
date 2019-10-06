@@ -12,10 +12,9 @@ module.exports = function onCalendarClick() {
 			e.source.close();
 		};
 	});
-
 	$.open();
 	$.add(Ti.UI.createWebView({
-		url:'https://munichways.com',
+		url:'https://munichways.com/',
 		enableZoomControls:false
 	}));
 

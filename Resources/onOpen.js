@@ -12,16 +12,12 @@ module.exports= function(e) {
 			icon : '/images/web.png',
 			showAsAction : Ti.Android.SHOW_AS_ACTION_IF_ROOM | Ti.Android.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW
 		});
-		const menuItem2 = menu.add({
-			title : 'Kalender',
-			icon : '/images/calendar.png',
-			showAsAction : Ti.Android.SHOW_AS_ACTION_IF_ROOM | Ti.Android.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW
-		});
+		
 		menuItem1.addEventListener('click', require('/web.window'));
-		menuItem2.addEventListener('click', require('/calendar.window'));
 		require('libs/checkPermissions')(['ACCESS_FINE_LOCATION'], {
 			onOK : function(e) {
 				$.geolocation=true;
+				return;
 				Ti.Geolocation.accuracy = Ti.Geolocation.ACCURACY_BEST;
 				Ti.Geolocation.distanceFilter = 20;
 				Ti.Geolocation.preferredProvider = Ti.Geolocation.PROVIDER_GPS;

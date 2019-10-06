@@ -2,17 +2,17 @@
 <ti:app xmlns:ti="http://ti.appcelerator.org">
     <id>de.appwerft.munichways</id>
     <name>munichways</name>
-    <version>1.0</version>
+    <version>1.0.2</version>
     <publisher>fuerst</publisher>
     <url/>
-    <description>undefined</description>
-    <copyright>2018 by fuerst@Hamburg</copyright>
+    <description>Muenchen</description>
+    <copyright>2019 by fuerst@Hamburg</copyright>
     <icon>appicon.png</icon>
     <fullscreen>false</fullscreen>
     <navbar-hidden>false</navbar-hidden>
     <statusbar-hidden>false</statusbar-hidden>
     <analytics>false</analytics>
-    <guid>19e10ae6-cc5a-409a-9fff-f89dc354b2b4</guid>
+    <guid>9ba1657a-8b54-465f-9fff-f89dc354b2b4</guid>
     <property name="ti.ui.defaultunit" type="string">dp</property>
     <property name="run-on-main-thread" type="bool">true</property>
     <ios>
@@ -55,6 +55,6 @@
         <target device="ipad">false</target>
         <target device="iphone">true</target>
     </deployment-targets>
-    <sdk-version>7.1.0.GA</sdk-version>
-    <property name="appc-app-id" type="string">5b9d2f82ea2c5d255650deb1</property>
+    <sdk-version>8.2.0.GA</sdk-version>
+    <property name="appc-app-id" type="string">5d99e966a4dcf302fb332216</property>
 </ti:app>
