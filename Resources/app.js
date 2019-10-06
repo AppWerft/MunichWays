@@ -53,14 +53,14 @@ var mock = false;
 	$.radPin = TiMap.createAnnotation({
 		image : '/images/rad.png',
 		latitude : STACHUS[0],
-		visible: Ti.Geolocation.locationServicesEnabled ? true : false,
+		visible : Ti.Geolocation.locationServicesEnabled ? true : false,
 		longitude : STACHUS[1]
 	});
 
-$.dummyPin = TiMap.createAnnotation({
+	$.dummyPin = TiMap.createAnnotation({
 		image : '/images/dummy.png',
 		latitude : STACHUS[0],
-		
+
 		longitude : STACHUS[1]
 	});
 	$.mapView.addEventListener('complete', function() {
@@ -68,13 +68,13 @@ $.dummyPin = TiMap.createAnnotation({
 		$.mapView.addAnnotation($.dummyPin);
 	});
 	$.mapView.addEventListener('click', function(e) {
-		if (!e.source.name) return;
-		$.dummyPin.latitude= e.latitude;
-		$.dummyPin.longitude= e.longitude;
-		$.dummyPin.title=e.source.name;
-		$.dummyPin.subtitle=e.source.description;
 		
-		$.mapView.selectAnnotation($.dummyPin);		
+		$.dummyPin.latitude = e.latitude;
+		$.dummyPin.longitude = e.longitude;
+		$.dummyPin.title = e.source.name;
+		$.dummyPin.subtitle = e.source.description;
+
+		$.mapView.selectAnnotation($.dummyPin);
 	});
 	$.addEventListener('focus', function() {
 		focused = true;
