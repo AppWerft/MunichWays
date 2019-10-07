@@ -14,6 +14,9 @@ module.exports = function(event) {
 		e.source.checked = !e.source.checked;
 		$.toggleLHM(e.source.checked);
 	};
+	const onMenuItem4click = function(e) {
+		
+	};
 	$.activity.onCreateOptionsMenu = function(e) {
 		abx.backgroundColor = '#6699cc';
 		abx.subtitle = "Mit dem Rad sicher und gemütlich durch München auf breiten Radwegen";
@@ -41,10 +44,15 @@ module.exports = function(event) {
 			checkable : true,
 			checked : false
 		});
+		const menuItem4 = menu.add({
+			title : 'Über …',
+		});
 		menuItem0.addEventListener('click', require('/web.window'));
 		menuItem1.addEventListener('click', onMenuItem1click);
 		menuItem2.addEventListener('click', onMenuItem2click);
 		menuItem3.addEventListener('click', onMenuItem3click);
+		menuItem4.addEventListener('click', onMenuItem4click);
+
 		require('libs/checkPermissions')(['ACCESS_FINE_LOCATION'], {
 			onOK : function(e) {
 				$.geolocation = true;

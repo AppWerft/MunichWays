@@ -18,7 +18,7 @@ var mock = false;
 
 (function() {
 
-const $ = Ti.UI.createWindow({
+	const $ = Ti.UI.createWindow({
 		exitOnClose : true,
 		geolocation : false,
 		_Polylines : []
@@ -60,7 +60,8 @@ const $ = Ti.UI.createWindow({
 	$.dummyPin = TiMap.createAnnotation({
 		image : '/images/dummy.png',
 		latitude : STACHUS[0],
-		longitude : STACHUS[1]
+		longitude : STACHUS[1],
+		rightButton : '/images/streetview.png'
 	});
 	$.mapView.addEventListener('complete', function() {
 		$.mapView.addAnnotation($.dummyPin);
@@ -70,19 +71,35 @@ const $ = Ti.UI.createWindow({
 			url : LHM
 		});
 		$._OpenPT = TiMap.createTileOverlay({
-			debuglevel : 1	,
+			debuglevel : 1,
 			service : TiMap.TILE_OVERLAY_TYPE_XYZ,
 			name : 'OpenPtMap'
 		});
 	});
 	$.mapView.addEventListener('click', function(e) {
+		switch (e.clicksource) {
+		case "rightPane":
+		case "infoWindow":
+			require('/streetview.window')({
+				Map : TiMap,
+				lat : e.latitude,
+				lng : e.longitude,
+				subtitle : "Straßenansicht: " + $.dummyPin.title
+			});
+			break;
+		case "polyline":
+		$.mapView.deselectAnnotation($.dummyPin);
+			$.dummyPin.latitude = e.latitude;
+			$.dummyPin.longitude = e.longitude;
+			$.dummyPin.title = e.source.name;
+			$.dummyPin.subtitle = e.source.description;
+			$.mapView.selectAnnotation($.dummyPin);
+			break;
+		default:
+				$.mapView.deselectAnnotation($.dummyPin);
 
-		$.dummyPin.latitude = e.latitude;
-		$.dummyPin.longitude = e.longitude;
-		$.dummyPin.title = e.source.name;
-		$.dummyPin.subtitle = e.source.description;
+		}
 
-		$.mapView.selectAnnotation($.dummyPin);
 	});
 	$.addEventListener('focus', function() {
 		focused = true;
@@ -111,7 +128,7 @@ const $ = Ti.UI.createWindow({
 			$._LHM && $.mapView.addTileOverlay($._LHM);
 			break;
 		case false:
-			$._LHM  && $.mapView.removeTileOverlay($._LHM);
+			$._LHM && $.mapView.removeTileOverlay($._LHM);
 			break;
 		}
 	};

@@ -362,6 +362,7 @@ android/support/v4/app/FrameMetricsAggregator.class
 android/support/v4/app/BaseFragmentActivityApi14.class
 android/support/v4/app/NotificationCompat.class
 android/support/v4/media/session/MediaSessionCompat.class
+org/appcelerator/titanium/TiVerify.class
 android/support/design/widget/TabLayout$AdapterChangeListener.class
 android/support/v7/widget/StaggeredGridLayoutManager.class
 ti/modules/titanium/ui/widget/webview/TiWebViewBinding$TiReturn.class
