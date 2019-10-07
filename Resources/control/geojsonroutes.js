@@ -79,13 +79,14 @@ $.prototype.getPolylines = function(Map, url, cb) {
 	getFeatures(url, function(features) {
 		features.forEach(function(feature) {
 			if (feature.type == "Feature" && feature.geometry) {
+				const description = feature.properties.description ? feature.properties.description.replace(/(<([^>]+)>)/ig, "") : '';
 				switch (feature.geometry.type) {
 				case "LineString":
 					Polylines.push(Map.createPolyline({
 						points : feature.geometry.coordinates,
 						color : getColor(feature.properties.farbe),
 						width : 5 * LDF,
-						description : feature.properties.description ? feature.properties.description.replace(/(<([^>]+)>)/ig, "") : '',
+						description : description,
 						name : feature.properties.name,
 						soll : feature.properties.soll,
 						ist : feature.properties.ist
@@ -96,8 +97,11 @@ $.prototype.getPolylines = function(Map, url, cb) {
 						Polylines.push(Map.createPolyline({
 							points : coords,
 							color : getColor(feature.properties.farbe),
-							width : 5 * LDF,
-							description : feature.properties.description
+							width : 3 * LDF,
+							description : description,
+							name : feature.properties.name,
+							soll : feature.properties.soll,
+							ist : feature.properties.ist
 						}));
 					});
 					break;
