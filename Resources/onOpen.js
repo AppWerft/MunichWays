@@ -15,6 +15,7 @@ module.exports = function(event) {
 		$.toggleLHM(e.source.checked);
 	};
 	const onMenuItem4click = function(e) {
+		require("colorlegende.dialog")();
 		
 	};
 	$.activity.onCreateOptionsMenu = function(e) {
@@ -45,7 +46,7 @@ module.exports = function(event) {
 			checked : false
 		});
 		const menuItem4 = menu.add({
-			title : 'Über …',
+			title : 'Farberklärung',
 		});
 		menuItem0.addEventListener('click', require('/web.window'));
 		menuItem1.addEventListener('click', onMenuItem1click);
