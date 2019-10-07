@@ -4,7 +4,7 @@
 
 <img src="https://github.com/AppWerft/MunichWays/blob/master/screens/1.JPEG" width=240 /> <img src="https://github.com/AppWerft/MunichWays/blob/master/screens/4.JPEG" width=240 /> 
  
-<img src="https://github.com/AppWerft/MunichWays/blob/master/screens/6.JPEG" width=240 /> <img src="https://github.com/AppWerft/MunichWays/blob/master/screens/8.JPEG" width=240 />
+<img src="https://github.com/AppWerft/MunichWays/blob/master/screens/6.JPEG" width=240 /> 
 
 Install with: 
 
