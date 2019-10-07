@@ -70,7 +70,7 @@ const getColor = function(c) {
 	case "rot" :
 		return '#ff6600';
 	default:
-		return "blue";
+		return "#6699cc";
 	}
 };
 
