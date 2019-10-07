@@ -51,4 +51,5 @@
 -injars "/Users/fuerst/Library/Application Support/Titanium/mobilesdk/osx/8.2.0.GA/android/modules/titanium-platform.jar"(!META-INF/**)
 -injars "/Users/fuerst/Library/Application Support/Titanium/mobilesdk/osx/8.2.0.GA/android/modules/titanium-utils.jar"(!META-INF/**)
 -injars "/Users/fuerst/Library/Application Support/Titanium/mobilesdk/osx/8.2.0.GA/android/modules/titanium-geolocation.jar"(!META-INF/**)
+-injars "/Users/fuerst/Library/Application Support/Titanium/mobilesdk/osx/8.2.0.GA/android/modules/titanium-gesture.jar"(!META-INF/**)
 -outjars "/Users/fuerst/Documents/MLearning/MunichWays/build/android/mainDexClasses.jar"

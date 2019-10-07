@@ -698,6 +698,7 @@ android/support/v4/os/ParcelableCompatCreatorCallbacks.class
 android/support/v4/media/VolumeProviderCompat$1.class
 android/support/v4/view/VelocityTrackerCompat.class
 android/support/transition/Transition$1.class
+ti/modules/titanium/gesture/GestureModule.class
 android/support/design/widget/SnackbarManager$Callback.class
 android/support/v4/widget/TextViewCompat$TextViewCompatBaseImpl.class
 android/support/v4/view/GravityCompat.class
