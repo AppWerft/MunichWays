@@ -13,11 +13,11 @@ function Log(foo) {
 const LAYERID = "6ddc01f1@9b6953ac45e3de3050693c3b1a21a83d:1570390392755";
 const LHM = "https://cartocdn-gusc-c.global.ssl.fastly.net/usocialmaps/api/v1/map/usocialmaps@" + LAYERID + "/1,2,3,4,5/{z}/{x}/{y}.png";
 const OPENPT = "http://openptmap.org/tiles/{z}/{x}/{y}.png";
-const UNFALL = "http://www.wms.nrw.de/wms/unfallatlas?";
+
 var mock = false;
 
 (function() {
-
+	var Overlays = {};
 	const $ = Ti.UI.createWindow({
 		exitOnClose : true,
 		geolocation : false,
@@ -65,24 +65,17 @@ var mock = false;
 	});
 	$.mapView.addEventListener('complete', function() {
 		$.mapView.addAnnotation($.dummyPin);
-		$._LHM = TiMap.createTileOverlay({
-			debuglevel : 2,
-			service : TiMap.TILE_OVERLAY_TYPE_XYZ,
-			url : LHM
-		});
-		$._OpenPT = TiMap.createTileOverlay({
-			debuglevel : 1,
-			service : TiMap.TILE_OVERLAY_TYPE_XYZ,
-			name : 'OpenPtMap'
-		});
-		$._Unfall = TiMap.createTileOverlay({
-			debuglevel : 1,
+		$._VeloUnfall = TiMap.createTileOverlay({
+			debuglevel : 0,
 			service : TiMap.TILE_OVERLAY_TYPE_WMS,
-			version: "1.3.0",
-			layer: "Beteiligung_Fahrrad_5000_2018",
-			style :"default",
-			crs:"EPSG:4326"
-			
+			format: "image/png",
+			version : "1.3.0",
+			url : "http://www.wms.nrw.de/wms/unfallatlas",
+			layer : "Beteiligung_Fahrrad_5000_2018",
+			style : "default",
+			transparent : true,
+			crs : "EPSG:4326"
+
 		});
 	});
 	$.mapView.addEventListener('click', function(e) {
@@ -97,7 +90,7 @@ var mock = false;
 			});
 			break;
 		case "polyline":
-		$.mapView.deselectAnnotation($.dummyPin);
+			$.mapView.deselectAnnotation($.dummyPin);
 			$.dummyPin.latitude = e.latitude;
 			$.dummyPin.longitude = e.longitude;
 			$.dummyPin.title = e.source.name;
@@ -105,7 +98,7 @@ var mock = false;
 			$.mapView.selectAnnotation($.dummyPin);
 			break;
 		default:
-				$.mapView.deselectAnnotation($.dummyPin);
+			$.mapView.deselectAnnotation($.dummyPin);
 
 		}
 
@@ -122,32 +115,44 @@ var mock = false;
 
 	});
 	$.toggleOpenPT = function(on) {
+		if (!Overlays.OpenPT)
+			Overlays.OpenPT = TiMap.createTileOverlay({
+				debuglevel : 1,
+				service : TiMap.TILE_OVERLAY_TYPE_XYZ,
+				name : 'OpenPtMap'
+			});
 		switch (on) {
 		case true:
-			$._OpenPT && $.mapView.addTileOverlay($._OpenPT);
+			$.mapView.addTileOverlay(Overlays.OpenPT);
 			break;
 		case false:
-			$._OpenPT && $.mapView.removeTileOverlay($._OpenPT);
+			$.mapView.removeTileOverlay(Overlays.OpenPT);
 			break;
 		}
 	};
-	$.toggleUnfall = function(on) {
+	$.toggleVeloUnfall = function(on) {
 		switch (on) {
 		case true:
-			$._Unfall && $.mapView.addTileOverlay($._Unfall);
+			$._VeloUnfall && $.mapView.addTileOverlay($._VeloUnfall);
 			break;
 		case false:
-			$._Unfall && $.mapView.removeTileOverlay($._Unfall);
+			$._VeloUnfall && $.mapView.removeTileOverlay($._VeloUnfall);
 			break;
 		}
 	};
 	$.toggleLHM = function(on) {
+		if (!Overlays.LHM)
+			Overlays.LHM = TiMap.createTileOverlay({
+				debuglevel : 2,
+				service : TiMap.TILE_OVERLAY_TYPE_XYZ,
+				url : LHM
+			});
 		switch (on) {
 		case true:
-			$._LHM && $.mapView.addTileOverlay($._LHM);
+			$.mapView.addTileOverlay(Overlays.LHM);
 			break;
 		case false:
-			$._LHM && $.mapView.removeTileOverlay($._LHM);
+			$.mapView.removeTileOverlay(Overlays.LHM);
 			break;
 		}
 	};
@@ -167,7 +172,6 @@ var mock = false;
 
 		}
 	};
-	
 
 })();
 

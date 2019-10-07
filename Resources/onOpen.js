@@ -16,11 +16,11 @@ module.exports = function(event) {
 	};
 	const onMenuItem4click = function(e) {
 		e.source.checked = !e.source.checked;
-		$.toggleUnfall(e.source.checked);
+		$.toggleVeloUnfall(e.source.checked);
 	};
 	const onMenuItem10click = function(e) {
 		require("colorlegende.dialog")();
-		
+
 	};
 	$.activity.onCreateOptionsMenu = function(e) {
 		abx.backgroundColor = '#6699cc';
@@ -42,16 +42,20 @@ module.exports = function(event) {
 		const menuItem2 = menu.add({
 			title : 'ÖPNV',
 			checkable : true,
+			visible : false,
 			checked : false
 		});
 		const menuItem3 = menu.add({
 			title : 'Hauptrouten LHM',
 			checkable : true,
+			visible : false,
 			checked : false
 		});
 		const menuItem4 = menu.add({
 			title : 'Radlerunfälle 2018',
 			checkable : true,
+			visible : false,
+			enabled:false,
 			checked : false
 		});
 		const menuItem10 = menu.add({
@@ -78,7 +82,13 @@ module.exports = function(event) {
 				alert('So, im Falle der Verweigerung funktioniert die App nicht. Schade.');
 			}
 		});
+		Ti.Gesture.addEventListener("shake", function() {
+			menuItem2.visible = true;
+			menuItem3.visible = true;
+			menuItem4.visible = true;
+		});
 	};
+
 	Ti.Gesture.addEventListener("orientationchange", function(orientationchangeEvent) {
 		const actionBar = $.activity.actionBar;
 		if (actionBar) {
