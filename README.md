@@ -1,9 +1,11 @@
 # MunichWays
 
+<img src="https://github.com/AppWerft/MunichWays/blob/master/screens/5.JPEG" width=240 /> 
+
 <img src="https://github.com/AppWerft/MunichWays/blob/master/screens/1.JPEG" width=240 /> 
 <img src="https://github.com/AppWerft/MunichWays/blob/master/screens/4.JPEG" width=240 /> 
-<img src="https://github.com/AppWerft/MunichWays/blob/master/screens/5.JPEG" width=320 />  
-<img src="https://github.com/AppWerft/MunichWays/blob/master/screens/6.JPEG" width=320 /> <img src="https://github.com/AppWerft/MunichWays/blob/master/screens/8.JPEG" width=320 />
+ 
+<img src="https://github.com/AppWerft/MunichWays/blob/master/screens/6.JPEG" width=240 /> <img src="https://github.com/AppWerft/MunichWays/blob/master/screens/8.JPEG" width=320 />
 
 Install with: 
 
