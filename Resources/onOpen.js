@@ -3,9 +3,9 @@ const abx = require('com.alcoapps.actionbarextras');
 module.exports= function(e) {
 	const $ = e.source;
 	$.activity.onCreateOptionsMenu = function(e) {
-		abx.backgroundColor = 'rgb(51, 153, 255)';
+		abx.backgroundColor = '#6699cc';
 		abx.subtitle = "Radlwege in München";
-		abx.statusbarColor = 'rgb(26, 77, 127)';
+		abx.statusbarColor = '#6699cc';
 		var menu = e.menu;
 		const menuItem1 = menu.add({
 			title : 'Web',

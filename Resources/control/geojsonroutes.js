@@ -64,11 +64,11 @@ const getColor = function(c) {
 	case "schwarz" :
 		return 'black';
 	case "grün" :
-		return '#009900';
+		return '#27b403';
 	case "gelb" :
-		return 'yellow';
+		return '#fbba00';
 	case "rot" :
-		return 'red';
+		return '#ff6600';
 	default:
 		return "blue";
 	}

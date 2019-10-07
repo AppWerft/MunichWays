@@ -1,0 +1,17 @@
+android/ATTR_MINIFY=true
+android/ATTR_MINIFY.type=Boolean
+android/ATTR_PROJECT_NAME=MunichWays
+android/ATTR_PROJECT_NAME.type=String
+android/distribute_path=/Users/fuerst/Documents/MLearning/MunichWays
+android/distribute_path.type=String
+android/key_password=
+android/key_password.type=String
+android/keystore_alias=googlekey
+android/keystore_alias.type=String
+android/keystore_password=*MHpsNH
+android/keystore_password.type=String
+android/keystore_path=/Users/fuerst/.android.keystore
+android/keystore_path.type=String
+android/recent_output=/Users/fuerst/Documents/MLearning/MunichWays
+android/recent_output.type=String
+eclipse.preferences.version=1
