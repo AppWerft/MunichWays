@@ -13,7 +13,7 @@ function Log(foo) {
 const LAYERID = "6ddc01f1@9b6953ac45e3de3050693c3b1a21a83d:1570390392755";
 const LHM = "https://cartocdn-gusc-c.global.ssl.fastly.net/usocialmaps/api/v1/map/usocialmaps@" + LAYERID + "/1,2,3,4,5/{z}/{x}/{y}.png";
 const OPENPT = "http://openptmap.org/tiles/{z}/{x}/{y}.png";
-
+const UNFALL = "http://www.wms.nrw.de/wms/unfallatlas?";
 var mock = false;
 
 (function() {
@@ -75,6 +75,15 @@ var mock = false;
 			service : TiMap.TILE_OVERLAY_TYPE_XYZ,
 			name : 'OpenPtMap'
 		});
+		$._Unfall = TiMap.createTileOverlay({
+			debuglevel : 1,
+			service : TiMap.TILE_OVERLAY_TYPE_WMS,
+			version: "1.3.0",
+			layer: "Beteiligung_Fahrrad_5000_2018",
+			style :"default",
+			crs:"EPSG:4326"
+			
+		});
 	});
 	$.mapView.addEventListener('click', function(e) {
 		switch (e.clicksource) {
@@ -122,6 +131,16 @@ var mock = false;
 			break;
 		}
 	};
+	$.toggleUnfall = function(on) {
+		switch (on) {
+		case true:
+			$._Unfall && $.mapView.addTileOverlay($._Unfall);
+			break;
+		case false:
+			$._Unfall && $.mapView.removeTileOverlay($._Unfall);
+			break;
+		}
+	};
 	$.toggleLHM = function(on) {
 		switch (on) {
 		case true:
@@ -148,6 +167,7 @@ var mock = false;
 
 		}
 	};
+	
 
 })();
 

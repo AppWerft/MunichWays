@@ -15,6 +15,10 @@ module.exports = function(event) {
 		$.toggleLHM(e.source.checked);
 	};
 	const onMenuItem4click = function(e) {
+		e.source.checked = !e.source.checked;
+		$.toggleUnfall(e.source.checked);
+	};
+	const onMenuItem10click = function(e) {
 		require("colorlegende.dialog")();
 		
 	};
@@ -46,6 +50,11 @@ module.exports = function(event) {
 			checked : false
 		});
 		const menuItem4 = menu.add({
+			title : 'Radlerunfälle 2018',
+			checkable : true,
+			checked : false
+		});
+		const menuItem10 = menu.add({
 			title : 'Farberklärung',
 		});
 		menuItem0.addEventListener('click', require('/web.window'));
@@ -53,6 +62,7 @@ module.exports = function(event) {
 		menuItem2.addEventListener('click', onMenuItem2click);
 		menuItem3.addEventListener('click', onMenuItem3click);
 		menuItem4.addEventListener('click', onMenuItem4click);
+		menuItem10.addEventListener('click', onMenuItem10click);
 
 		require('libs/checkPermissions')(['ACCESS_FINE_LOCATION'], {
 			onOK : function(e) {
