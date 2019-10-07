@@ -78,16 +78,16 @@ $.prototype.getPolylines = function(Map, url, cb) {
 	var Polylines = [];
 	getFeatures(url, function(features) {
 		features.forEach(function(feature) {
-			if (feature.type == "Feature") {
+			if (feature.type == "Feature" && feature.geometry) {
 				switch (feature.geometry.type) {
 				case "LineString":
 					Polylines.push(Map.createPolyline({
 						points : feature.geometry.coordinates,
 						color : getColor(feature.properties.farbe),
 						width : 5 * LDF,
-						description : feature.properties.description,
-						name : feature.properties.name	,
-						soll : feature.properties.soll	,
+						description : feature.properties.description ? feature.properties.description.replace(/(<([^>]+)>)/ig, "") : '',
+						name : feature.properties.name,
+						soll : feature.properties.soll,
 						ist : feature.properties.ist
 					}));
 					break;

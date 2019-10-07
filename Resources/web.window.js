@@ -1,11 +1,11 @@
 module.exports = function onCalendarClick() {
 	var $ = Ti.UI.createWindow({
-		backgroundColor : 'rgb(51, 153, 255)'
+		backgroundColor : '#6699cc'
 	});
 	$.addEventListener('open', function(e) {
-		abx.backgroundColor = 'rgb(51, 153, 255)';
+		abx.backgroundColor = '#6699cc';
 		abx.subtitle = "Die Webseite";
-		abx.statusbarColor = 'rgb(26, 77, 127)';
+		abx.statusbarColor = '#6699cc';
 		var activity = e.source.getActivity();
 		activity.actionBar.displayHomeAsUp = true;
 		activity.actionBar.onHomeIconItemSelected = function() {
