@@ -2,7 +2,7 @@
 <ti:app xmlns:ti="http://ti.appcelerator.org">
     <id>de.appwerft.munichways</id>
     <name>munichways</name>
-    <version>1.0.5</version>
+    <version>1.0.6</version>
     <publisher>fuerst</publisher>
     <url/>
     <description>Muenchen</description>

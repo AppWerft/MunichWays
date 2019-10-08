@@ -4,7 +4,7 @@ module.exports = function(event) {
 	const $ = event.source;
 	const onMenuItem1click = function(e) {
 		e.source.checked = !e.source.checked;
-		$.toggleMunichWays(e.source.checked);
+		$.toggleGesamtnetz(e.source.checked);
 	};
 	const onMenuItem2click = function(e) {
 		e.source.checked = !e.source.checked;
@@ -27,16 +27,21 @@ module.exports = function(event) {
 		abx.subtitle = "Mit dem Rad sicher und gemütlich durch München auf breiten Radwegen";
 		abx.statusbarColor = '#6699cc';
 		var menu = e.menu;
-		const menuItem0 = menu.add({
+		const menuItem = menu.add({
 			title : 'Web',
 			icon : '/images/web.png',
 			showAsAction : Ti.Android.SHOW_AS_ACTION_IF_ROOM | Ti.Android.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW
 		});
-
+		const menuItem0 = menu.add({
+			title : 'Vorrang-Radlnetz',
+			checkable : true,
+			checked : true,
+			enabled : false
+		});
 		const menuItem1 = menu.add({
 			title : 'Gesamt-Radlnetz',
 			checkable : true,
-			checked : true
+			checked : false
 		});
 
 		const menuItem2 = menu.add({
@@ -45,26 +50,21 @@ module.exports = function(event) {
 			visible : false,
 			checked : false
 		});
-		const menuItem3 = menu.add({
-			title : 'Hauptrouten LHM',
-			checkable : true,
-			visible : false,
-			checked : false
-		});
+		
 		const menuItem4 = menu.add({
 			title : 'Radlerunfälle 2018',
 			checkable : true,
 			visible : false,
-			enabled:false,
+			enabled : false,
 			checked : false
 		});
 		const menuItem10 = menu.add({
 			title : 'Farberklärung',
 		});
-		menuItem0.addEventListener('click', require('/web.window'));
+		menuItem.addEventListener('click', require('/web.window'));
 		menuItem1.addEventListener('click', onMenuItem1click);
 		menuItem2.addEventListener('click', onMenuItem2click);
-		menuItem3.addEventListener('click', onMenuItem3click);
+	//	menuItem3.addEventListener('click', onMenuItem3click);
 		menuItem4.addEventListener('click', onMenuItem4click);
 		menuItem10.addEventListener('click', onMenuItem10click);
 
@@ -84,7 +84,7 @@ module.exports = function(event) {
 		});
 		Ti.Gesture.addEventListener("shake", function() {
 			menuItem2.visible = true;
-			menuItem3.visible = true;
+		//wmenuItem3.visible = true;
 			menuItem4.visible = true;
 		});
 	};

@@ -3,7 +3,6 @@ const turf = require('org.turf');
 const URLs = ["https://www.munichways.com/App/radlvorrangnetz.geojson", "https://www.munichways.com/App/gesamtnetz.geojson"];
 
 function getFeatures(url, cb) {
-	console.log(url);
 	const $ = Ti.Network.createHTTPClient({
 		onload : function() {
 			const json = JSON.parse(this.responseText);
@@ -33,7 +32,6 @@ $.prototype.getNearestRoute = function(coords, cb) {
 	this.routes.forEach(function(route) {
 		if (route.points.length) {
 			var dists = [];
-
 			point = turf.point([coords.latitude, coords.longitude]),
 			line = turf.lineString(route.points.map(function(p) {
 				return [p.latitude, p.longitude];
@@ -74,34 +72,34 @@ const getColor = function(c) {
 	}
 };
 
-$.prototype.getPolylines = function(Map, url, cb) {
+$.prototype.getPolylines = function(Map, layer, cb) {
 	var Polylines = [];
-	getFeatures(url, function(features) {
+	getFeatures(layer.url, function(features) {
 		features.forEach(function(feature) {
 			if (feature.type == "Feature" && feature.geometry) {
 				const description = feature.properties.description ? feature.properties.description.replace(/(<([^>]+)>)/ig, "") : '';
 				switch (feature.geometry.type) {
 				case "LineString":
 					Polylines.push(Map.createPolyline({
+						pattern : layer.pattern,
 						points : feature.geometry.coordinates,
 						color : getColor(feature.properties.farbe),
-						width : 5 * LDF,
+						width : Math.round(layer.width * LDF),
 						description : description,
-						name : feature.properties.name,
-						soll : feature.properties.soll,
-						ist : feature.properties.ist
+						name : feature.properties.name
+						
 					}));
 					break;
 				case "MultiLineString":
 					feature.geometry.coordinates.forEach(function(coords) {
 						Polylines.push(Map.createPolyline({
 							points : coords,
+							pattern : layer.pattern,
 							color : getColor(feature.properties.farbe),
-							width : 3 * LDF,
+							width : Math.round(layer.width * LDF),
 							description : description,
-							name : feature.properties.name,
-							soll : feature.properties.soll,
-							ist : feature.properties.ist
+							name : feature.properties.name
+							
 						}));
 					});
 					break;
