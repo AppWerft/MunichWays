@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+	<style name="Theme.MunichWays" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+		<item name="android:windowTranslucentNavigation">true</item>
+		<item name="colorPrimary">#6699CC</item>
+		<item name="colorControlActivated">#6699CC</item>
+	</style>
+
+</resources>

@@ -82,11 +82,7 @@ module.exports = function(event) {
 				alert('So, im Falle der Verweigerung funktioniert die App nicht. Schade.');
 			}
 		});
-		Ti.Gesture.addEventListener("shake", function() {
-			menuItem2.visible = true;
-		//wmenuItem3.visible = true;
-			menuItem4.visible = true;
-		});
+		
 	};
 
 	Ti.Gesture.addEventListener("orientationchange", function(orientationchangeEvent) {
