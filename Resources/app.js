@@ -81,6 +81,9 @@ function getStyle(style) {
 	});
 	$.mapView.addEventListener('complete', function() {
 		$.mapView.addAnnotation($.dummyPin);
+		$.mapView.addHeatMapLayer({
+			points : require('libs/getUnfallPoints')()
+		});
 		$._VeloUnfall = TiMap.createTileOverlay({
 			debuglevel : 0,
 			service : TiMap.TILE_OVERLAY_TYPE_WMS,
@@ -212,3 +215,5 @@ function getStyle(style) {
 		}
 	};
 })();
+
+
