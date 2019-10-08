@@ -29,6 +29,9 @@ const GEOJSONENDPOINTS = {
 };
 
 var mock = false;
+function getStyle(style) {
+	return Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory, "assets/", style + ".json").read().getText();
+}
 
 (function() {
 	var Overlays = {};
@@ -51,13 +54,16 @@ var mock = false;
 		},
 		mapType : TiMap.NORMAL_TYPE,
 		mapToolbarEnabled : false,
-		style : Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory, "data", "mapstyle.json").read().getText(),
+		style : getStyle("retro"),
 		routes : {},
 		lifecycleContainer : $,
 		enableZoomControls : false
 	});
 	$.add($.mapView);
-
+	Ti.App.addEventListener("mapstyle", function(e) {
+		console.log(e.style);
+		$.mapView.style = getStyle(e.style);
+	});
 	var Routes = new RouteModule();
 	Object.keys(GEOJSONENDPOINTS).forEach(function(key) {
 		Routes.getPolylines(TiMap, GEOJSONENDPOINTS[key], function(polylines) {

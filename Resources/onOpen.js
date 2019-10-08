@@ -8,7 +8,7 @@ module.exports = function(event) {
 	};
 	const onMenuItem2click = function(e) {
 		e.source.checked = !e.source.checked;
-		$.toggleOpenPT(e.source.checked);
+		require("style.dialog")();
 	};
 	const onMenuItem3click = function(e) {
 		e.source.checked = !e.source.checked;
@@ -45,10 +45,10 @@ module.exports = function(event) {
 		});
 
 		const menuItem2 = menu.add({
-			title : 'ÖPNV',
-			checkable : true,
-			visible : false,
-			checked : false
+			title : 'Kartenstil',
+			checkable : false,
+			visible : true,
+			
 		});
 		
 		const menuItem4 = menu.add({
