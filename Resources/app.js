@@ -54,7 +54,7 @@ function getStyle(style) {
 		},
 		mapType : TiMap.NORMAL_TYPE,
 		mapToolbarEnabled : false,
-		style : getStyle("retro"),
+		style : getStyle(require("control/maptype").getMaptype()),
 		routes : {},
 		lifecycleContainer : $,
 		enableZoomControls : false
@@ -81,21 +81,7 @@ function getStyle(style) {
 	});
 	$.mapView.addEventListener('complete', function() {
 		$.mapView.addAnnotation($.dummyPin);
-		$.mapView.addHeatMapLayer({
-			points : require('libs/getUnfallPoints')()
-		});
-		$._VeloUnfall = TiMap.createTileOverlay({
-			debuglevel : 0,
-			service : TiMap.TILE_OVERLAY_TYPE_WMS,
-			format : "image/png",
-			version : "1.3.0",
-			url : "http://www.wms.nrw.de/wms/unfallatlas",
-			layer : "Beteiligung_Fahrrad_5000_2018",
-			style : "default",
-			transparent : true,
-			crs : "EPSG:4326"
 
-		});
 	});
 	$.mapView.addEventListener('click', function(e) {
 		switch (e.clicksource) {
@@ -171,10 +157,16 @@ function getStyle(style) {
 	$.toggleVeloUnfall = function(on) {
 		switch (on) {
 		case true:
-			$._VeloUnfall && $.mapView.addTileOverlay($._VeloUnfall);
+			if (!Overlays.Unfaelle)
+				Overlays.Unfaelle = TiMap.createHeatmapOverlay({
+					points : require('libs/getUnfallPoints')()
+				});
+			$.mapView.addHeatmapOverlay(Overlays.Unfaelle);
 			break;
 		case false:
-			$._VeloUnfall && $.mapView.removeTileOverlay($._VeloUnfall);
+			if (Overlays.Unfaelle) 
+				$.mapView.removeHeatmapOverlay(Overlays.Unfaelle);
+				else console.log("no heatmap to delete");
 			break;
 		}
 	};
@@ -215,5 +207,4 @@ function getStyle(style) {
 		}
 	};
 })();
-
 

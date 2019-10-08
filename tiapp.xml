@@ -2,9 +2,9 @@
 <ti:app xmlns:ti="http://ti.appcelerator.org">
     <id>de.appwerft.munichways</id>
     <name>munichways</name>
-    <version>1.0.8</version>
+    <version>1.0.9</version>
     <publisher>fuerst</publisher>
-    <url/>
+    <url>undefined</url>
     <description>Muenchen</description>
     <copyright>2019 by fuerst@Hamburg</copyright>
     <icon>appicon.png</icon>

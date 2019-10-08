@@ -6,18 +6,18 @@ module.exports = function(event) {
 		e.source.checked = !e.source.checked;
 		$.toggleGesamtnetz(e.source.checked);
 	};
+	const onMenuItem4click = function(e) {
+		e.source.checked = !e.source.checked;
+		console.log(e.source.checked);
+		$.toggleVeloUnfall(e.source.checked);
+	};
+	
 	const onMenuItem2click = function(e) {
 		e.source.checked = !e.source.checked;
 		require("style.dialog")();
 	};
-	const onMenuItem3click = function(e) {
-		e.source.checked = !e.source.checked;
-		$.toggleLHM(e.source.checked);
-	};
-	const onMenuItem4click = function(e) {
-		e.source.checked = !e.source.checked;
-		$.toggleVeloUnfall(e.source.checked);
-	};
+	
+	
 	const onMenuItem10click = function(e) {
 		require("colorlegende.dialog")();
 
@@ -27,44 +27,49 @@ module.exports = function(event) {
 		abx.subtitle = "Mit dem Rad sicher und gemütlich durch München auf breiten Radwegen";
 		abx.statusbarColor = '#6699cc';
 		var menu = e.menu;
-		const menuItem = menu.add({
-			title : 'Web',
-			icon : '/images/web.png',
-			showAsAction : Ti.Android.SHOW_AS_ACTION_IF_ROOM | Ti.Android.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW
-		});
+		
 		const menuItem0 = menu.add({
 			title : 'Vorrang-Radlnetz',
 			checkable : true,
+			groupId :1,
 			checked : true,
 			enabled : false
 		});
 		const menuItem1 = menu.add({
 			title : 'Gesamt-Radlnetz',
 			checkable : true,
+			groupId :1,
 			checked : false
 		});
-
-		const menuItem2 = menu.add({
-			title : 'Kartenstil',
-			checkable : false,
-			visible : true,
-			
-		});
-		
 		const menuItem4 = menu.add({
 			title : 'Radlerunfälle 2018',
 			checkable : true,
-			visible : false,
-			enabled : false,
+			visible : true,
+			groupId :1,
+			enabled : true,
 			checked : false
+		});
+		
+		const menuItem2 = menu.add({
+			title : 'Kartenstil',
+			groupId :2,
+			checkable : false,
+			visible : true,
+
+		});
+const menuItem = menu.add({
+			title : 'Webseite',
+			icon : '/images/web.png',
+		//	showAsAction : Ti.Android.SHOW_AS_ACTION_IF_ROOM | Ti.Android.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW
 		});
 		const menuItem10 = menu.add({
 			title : 'Farberklärung',
+			groupId :3,
 		});
 		menuItem.addEventListener('click', require('/web.window'));
 		menuItem1.addEventListener('click', onMenuItem1click);
 		menuItem2.addEventListener('click', onMenuItem2click);
-	//	menuItem3.addEventListener('click', onMenuItem3click);
+	
 		menuItem4.addEventListener('click', onMenuItem4click);
 		menuItem10.addEventListener('click', onMenuItem10click);
 
@@ -82,7 +87,7 @@ module.exports = function(event) {
 				alert('So, im Falle der Verweigerung funktioniert die App nicht. Schade.');
 			}
 		});
-		
+
 	};
 
 	Ti.Gesture.addEventListener("orientationchange", function(orientationchangeEvent) {

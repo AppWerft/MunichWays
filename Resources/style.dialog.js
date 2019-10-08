@@ -1,4 +1,5 @@
 module.exports = function() {
+	
 	const androidView = Ti.UI.createScrollableView({
 		height : 320,
 		views : [Ti.UI.createImageView({
@@ -20,11 +21,12 @@ module.exports = function() {
 		backgroundColor : 'white'
 	});
 	const onScrollEnd = function(e) {
+		require("control/maptype").setMaptype(e.view.mapstyle);
 		Ti.App.fireEvent("mapstyle", {
 			style : e.view.mapstyle
-		});	
+		});
 	};
-	androidView.addEventListener("scrollend",onScrollEnd);
+	androidView.addEventListener("scrollend", onScrollEnd);
 	const $ = Ti.UI.createAlertDialog({
 		androidView : androidView,
 		title : "Auswahl des Kartenstils",
@@ -32,9 +34,11 @@ module.exports = function() {
 		ok : 'Ok',
 	});
 	$.addEventListener("click", function() {
-		androidView.removeEventListener("scrollend",onScrollEnd);
+		androidView.removeEventListener("scrollend", onScrollEnd);
 	});
-	androidView.scrollToView(2);
+	androidView.views.forEach(function(view, index) {
+		if (view.mapstyle == require("control/maptype").getMaptype())
+			androidView.scrollToView(index);
+	});
 	$.show();
-
 };
