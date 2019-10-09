@@ -65,6 +65,13 @@ module.exports = function(event) {
 			title : 'Bewertungskriterien',
 			groupId : 3,
 		});
+
+		const sucheItem = menu.add({
+			icon : Ti.Android.R.drawable.ic_menu_search,
+			showAsAction : Ti.Android.SHOW_AS_ACTION_IF_ROOM | Ti.Android.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW,
+			enabled : true,
+			title: "Suche …"
+		});
 		menuItem.addEventListener('click', require('/web.window'));
 		menuItem1.addEventListener('click', onMenuItem1click);
 		menuItem2.addEventListener('click', onMenuItem2click);
