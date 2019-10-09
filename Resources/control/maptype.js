@@ -3,5 +3,5 @@ exports.setMaptype= function(type) {
 };
 
 exports.getMaptype= function() {
-	return Ti.App.Properties.getString("MP","retro");	
+	return Ti.App.Properties.getString("MP","standard");	
 };

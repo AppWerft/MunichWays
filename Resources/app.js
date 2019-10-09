@@ -11,15 +11,15 @@ const OPENPT = "http://openptmap.org/tiles/{z}/{x}/{y}.png";
 const GEOJSONENDPOINTS = {
 	"vorrangnetz" : {
 		"url" : "https://www.munichways.com/App/radlvorrangnetz.geojson",
-		"width" : 7,
+		"width" : 5,
 		"pattern" : {
 			"type" : TiMap.POLYLINE_PATTERN_DOTTED,
-			"gapLength" : 3
+			"gapLength" : 2
 		}
 	},
 	"gesamtnetz" : {
 		"url" : "https://www.munichways.com/App/gesamtnetz.geojson",
-		"width" : 4,
+		"width" : 5,
 		"pattern" : {
 			"type" : TiMap.POLYLINE_PATTERN_DASHED,
 			"dashLength" : 3,
