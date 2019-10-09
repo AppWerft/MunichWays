@@ -5,6 +5,8 @@
 		<item name="android:windowTranslucentNavigation">true</item>
 		<item name="colorPrimary">#6699CC</item>
 		<item name="colorControlActivated">#6699CC</item>
+		
 	</style>
+
 
 </resources>

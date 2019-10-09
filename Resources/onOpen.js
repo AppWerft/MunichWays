@@ -2,31 +2,30 @@ const abx = require('com.alcoapps.actionbarextras');
 
 module.exports = function(event) {
 	const $ = event.source;
+	const onSucheItemclick = function() {
+		require("search.dialog")();
+	};
 	const onMenuItem1click = function(e) {
 		e.source.checked = !e.source.checked;
 		$.toggleGesamtnetz(e.source.checked);
 	};
 	const onMenuItem4click = function(e) {
 		e.source.checked = !e.source.checked;
-		console.log(e.source.checked);
 		$.toggleVeloUnfall(e.source.checked);
 	};
-
 	const onMenuItem2click = function(e) {
-		e.source.checked = !e.source.checked;
-		require("style.dialog")();
+		require("mapstyle.dialog")();
 	};
-
 	const onMenuItem10click = function(e) {
 		require("colorlegende.window")();
-
 	};
+	
 	$.activity.onCreateOptionsMenu = function(e) {
 		abx.backgroundColor = '#6699cc';
 		abx.subtitle = "Mit dem Rad sicher und gemütlich durch München auf breiten Radwegen";
 		abx.statusbarColor = '#6699cc';
+		abx.titleFont = "Cairo-Regular";
 		var menu = e.menu;
-
 		const menuItem0 = menu.add({
 			title : 'Vorrang-Radlnetz',
 			checkable : true,
@@ -50,35 +49,38 @@ module.exports = function(event) {
 		});
 
 		const menuItem2 = menu.add({
-			title : 'Kartenstil',
+			title : 'Umschaltung Kartenstil',
 			groupId : 2,
 			checkable : false,
 			visible : true,
 
 		});
 		const menuItem = menu.add({
-			title : 'Webseite',
-			icon : '/images/web.png',
-			//	showAsAction : Ti.Android.SHOW_AS_ACTION_IF_ROOM | Ti.Android.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW
+			title : 'MunichWays Webseite',
+		});
+		const paypal = menu.add({
+			title : 'Spende per Paypal',
+			enabled:false,
+			groupId : 3,
 		});
 		const menuItem10 = menu.add({
 			title : 'Bewertungskriterien',
 			groupId : 3,
 		});
 
-		const sucheItem = menu.add({
+		/*const sucheItem = menu.add({
 			icon : Ti.Android.R.drawable.ic_menu_search,
 			showAsAction : Ti.Android.SHOW_AS_ACTION_IF_ROOM | Ti.Android.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW,
 			enabled : true,
 			title: "Suche …"
-		});
+		});*/
 		menuItem.addEventListener('click', require('/web.window'));
 		menuItem1.addEventListener('click', onMenuItem1click);
 		menuItem2.addEventListener('click', onMenuItem2click);
 
 		menuItem4.addEventListener('click', onMenuItem4click);
 		menuItem10.addEventListener('click', onMenuItem10click);
-
+sucheItem.addEventListener('click', onSucheItemclick);
 		require('libs/checkPermissions')(['ACCESS_FINE_LOCATION'], {
 			onOK : function(e) {
 				$.geolocation = true;

@@ -77,7 +77,6 @@ $.prototype.getPolylines = function(Map, layer, cb) {
 	var Polylines = [];
 	getFeatures(layer.url, function(features) {
 		features.forEach(function(feature) {
-			console.log(feature.properties);
 			if (feature.type == "Feature" && feature.geometry) {
 				var description = feature.properties.description ? feature.properties.description.replace(/(<([^>]+)>)/ig, "") : '';
 				if (feature.properties.ist) description += "\n"+ feature.properties.ist;

@@ -10,6 +10,7 @@ module.exports = function onCalendarClick() {
 	$.addEventListener('open', function(e) {
 		abx.statusbarColor = '#334866';
 		abx.subtitle = "Bewertungskriterien der Radwege";
+		abx.titleFont = "Cairo-Regular";
 		abx.backgroundColor = '#6699cc';
 		var activity = e.source.getActivity();
 		activity.actionBar.displayHomeAsUp = true;
@@ -24,7 +25,7 @@ module.exports = function onCalendarClick() {
 		height : "auto",
 		image : "https://www.munichways.com/wp-content/uploads/2019/07/Bewertung-gr%C3%BCn.jpg"
 	}));
-	
+
 	$.children[0].add(Ti.UI.createLabel({
 		top : 10,
 		color : "#27b403",
@@ -32,7 +33,8 @@ module.exports = function onCalendarClick() {
 		right : 10,
 		font : {
 			fontSize : 20,
-			fontWeight: "bold"
+			fontWeight : "bold",
+			fontFamily : "Cairo-SemiBold"
 		},
 		text : "Gemütlich und komfortabel, Radweg ist breit, sicher, guter Untergrund"
 	}));
@@ -42,7 +44,8 @@ module.exports = function onCalendarClick() {
 		left : 10,
 		right : 10,
 		font : {
-			fontSize : 20
+			fontSize : 18,
+			fontFamily : "Cairo-Regular"
 		},
 		text : "Würdest du deinen 12 jährigen Sohn oder deine 80 jährige Oma dort fahren lassen? Ist der Radweg ausreichend breit (mindestens 2,30 Meter) und der Untergrund eben?\n\nWenn beide Fragen mit Ja beantwortet werden können, ist die Strecke grün, sonst mindestens gelb."
 	}));
@@ -52,8 +55,7 @@ module.exports = function onCalendarClick() {
 		height : "auto",
 		image : "https://www.munichways.com/wp-content/uploads/2019/07/Bewertung-gelb.jpg"
 	}));
-	
-	
+
 	$.children[0].add(Ti.UI.createLabel({
 		top : 10,
 		color : "#fbba00",
@@ -61,7 +63,8 @@ module.exports = function onCalendarClick() {
 		right : 10,
 		font : {
 			fontSize : 20,
-			fontWeight: "bold"
+			fontWeight : "bold",
+			fontFamily : "Cairo-SemiBold"
 		},
 		text : "Durchschnittlich, Radweg ist verbesserungswürdig"
 	}));
@@ -71,7 +74,8 @@ module.exports = function onCalendarClick() {
 		left : 10,
 		right : 10,
 		font : {
-			fontSize : 20
+			fontSize : 18,
+			fontFamily : "Cairo-Regular"
 		},
 		text : "Ist der Radweg mit kleineren Einschränkungen akzeptabel?\n\nBeispiele: Der Radweg ist sicher aber der Untergrund ist uneben. Der Radweg ist breit und eben aber verläuft ungeschützt auf der Fahrbahn."
 	}));
@@ -81,7 +85,7 @@ module.exports = function onCalendarClick() {
 		height : "auto",
 		image : "https://www.munichways.com/wp-content/uploads/2019/07/Bewertung-rot.jpg"
 	}));
-	
+
 	$.children[0].add(Ti.UI.createLabel({
 		top : 10,
 		color : "#ff6600",
@@ -89,7 +93,8 @@ module.exports = function onCalendarClick() {
 		right : 10,
 		font : {
 			fontSize : 20,
-			fontWeight: "bold"
+			fontWeight : "bold",
+			fontFamily : "Cairo-SemiBold"
 		},
 		text : "Stressig, Radweg ist sehr schmal, nicht sicher"
 	}));
@@ -99,11 +104,12 @@ module.exports = function onCalendarClick() {
 		left : 10,
 		right : 10,
 		font : {
-			fontSize : 20
+			fontSize : 18,
+			fontFamily : "Cairo-Regular"
 		},
 		text : "Gibt es starke Einschränkung bezüglich Sicherheit und Komfort.\n\nBeispiele: Der Radweg ist zu schmal, liegt an einer stark befahrenen Straße, der Untergrund ist stark beschädigt. Kein Radweg bei viel Pkw-Verkehr."
 	}));
-	
+
 	$.children[0].add(Ti.UI.createImageView({
 		top : 10,
 		width : Ti.UI.FILL,
@@ -116,20 +122,22 @@ module.exports = function onCalendarClick() {
 		left : 10,
 		right : 10,
 		font : {
-			fontSize : 20,fontWeight:"bold"
+			fontSize : 20,
+			fontWeight : "bold",
+			fontFamily : "Cairo-SemiBold"
 		},
 		text : "Lücke, kein Radweg auf stark befahrenen Straßen, Lücke im Netz, Brücke im Bau."
 	}));
-$.children[0].add(Ti.UI.createLabel({
+	$.children[0].add(Ti.UI.createLabel({
 		top : 10,
 		color : "#333",
 		left : 10,
 		right : 10,
 		font : {
-			fontSize : 20
+			fontSize : 18,
+			fontFamily : "Cairo-Regular"
 		},
 		text : "Die RadlVorrangStrecke ist unterbrochen, es fehlen Radwege auf stark befahrenen Straßen."
-	}));	
-
+	}));
 
 };

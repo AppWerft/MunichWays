@@ -73,3 +73,4 @@
 "/Users/fuerst/Documents/MLearning/MunichWays/build/android/gen/ti/modules/titanium/ui/Manifest.java"
 "/Users/fuerst/Documents/MLearning/MunichWays/build/android/gen/ti/modules/titanium/ui/R.java"
 "/Users/fuerst/Documents/MLearning/MunichWays/build/android/gen/ti/playservices/R.java"
+"/Users/fuerst/Documents/MLearning/MunichWays/build/android/gen/ti/scrollable/animation/R.java"

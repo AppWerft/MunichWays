@@ -2,7 +2,7 @@
 <ti:app xmlns:ti="http://ti.appcelerator.org">
     <id>de.appwerft.munichways</id>
     <name>MunichWays</name>
-    <version>1.0.10</version>
+    <version>1.0.12</version>
     <publisher>fuerst</publisher>
     <url>undefined</url>
     <description>Muenchen</description>
@@ -49,6 +49,7 @@
         <module platform="android">com.alcoapps.actionbarextras</module>
         <module platform="commonjs">org.turf</module>
         <module platform="android">ti.compassview</module>
+        <module platform="android">ti.scrollable.animation</module>
     </modules>
     <deployment-targets>
         <target device="android">true</target>

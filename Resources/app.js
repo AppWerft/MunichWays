@@ -50,7 +50,7 @@ function getStyle(style) {
 		region : {
 			latitude : STACHUS[0],
 			longitude : STACHUS[1],
-			zoom : 11
+			zoom : 12
 		},
 		mapType : TiMap.NORMAL_TYPE,
 		mapToolbarEnabled : false,
@@ -206,5 +206,9 @@ function getStyle(style) {
 			break;
 		}
 	};
+	Ti.API.info('Ti.Platform.displayCaps.density: ' + Ti.Platform.displayCaps.density);
+Ti.API.info('Ti.Platform.displayCaps.dpi: ' + Ti.Platform.displayCaps.dpi);
+Ti.API.info('Ti.Platform.displayCaps.platformHeight: ' + Ti.Platform.displayCaps.platformHeight);
+Ti.API.info('Ti.Platform.displayCaps.platformWidth: ' + Ti.Platform.displayCaps.platformWidth);
 })();
 
