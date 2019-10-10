@@ -2,6 +2,9 @@ const abx = require('com.alcoapps.actionbarextras');
 
 module.exports = function(event) {
 	const $ = event.source;
+	const onPaypalItemclick = function() {
+		require("paypal.dialog")();
+	};
 	const onSucheItemclick = function() {
 		require("search.dialog")();
 	};
@@ -34,10 +37,10 @@ module.exports = function(event) {
 			enabled : false
 		});
 		const menuItem1 = menu.add({
-			title : 'Gesamt-Radlnetz',
+			title : 'Gesamtnetz',
 			checkable : true,
 			groupId : 1,
-			checked : false
+			checked : true
 		});
 		const menuItem4 = menu.add({
 			title : 'Radlerunfälle 2018',
@@ -58,9 +61,9 @@ module.exports = function(event) {
 		const menuItem = menu.add({
 			title : 'MunichWays Webseite',
 		});
-		const paypal = menu.add({
-			title : 'Spende per Paypal',
-			enabled:false,
+		const paypalItem = menu.add({
+			title : 'Finanzielle Unterstützung',
+			enabled:true,
 			groupId : 3,
 		});
 		const menuItem10 = menu.add({
@@ -68,19 +71,21 @@ module.exports = function(event) {
 			groupId : 3,
 		});
 
-		/*const sucheItem = menu.add({
+		const sucheItem = menu.add({
 			icon : Ti.Android.R.drawable.ic_menu_search,
 			showAsAction : Ti.Android.SHOW_AS_ACTION_IF_ROOM | Ti.Android.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW,
 			enabled : true,
+			visible:false,
 			title: "Suche …"
-		});*/
+		});
 		menuItem.addEventListener('click', require('/web.window'));
 		menuItem1.addEventListener('click', onMenuItem1click);
 		menuItem2.addEventListener('click', onMenuItem2click);
-
+		paypalItem.addEventListener('click', onPaypalItemclick);
 		menuItem4.addEventListener('click', onMenuItem4click);
 		menuItem10.addEventListener('click', onMenuItem10click);
-sucheItem.addEventListener('click', onSucheItemclick);
+		sucheItem.addEventListener('click', onSucheItemclick);
+		
 		require('libs/checkPermissions')(['ACCESS_FINE_LOCATION'], {
 			onOK : function(e) {
 				$.geolocation = true;

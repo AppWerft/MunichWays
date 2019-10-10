@@ -38,9 +38,7 @@ function getStyle(style) {
 	const $ = Ti.UI.createWindow({
 		exitOnClose : true,
 		usertracking : false,
-
 	});
-
 	var focused = false;
 	$.addEventListener('open', require('onOpen'));
 	$.open();
@@ -50,7 +48,7 @@ function getStyle(style) {
 		region : {
 			latitude : STACHUS[0],
 			longitude : STACHUS[1],
-			zoom : 12
+			zoom : 14
 		},
 		mapType : TiMap.NORMAL_TYPE,
 		mapToolbarEnabled : false,
@@ -69,7 +67,7 @@ function getStyle(style) {
 		Routes.getPolylines(TiMap, GEOJSONENDPOINTS[key], function(polylines) {
 			Overlays[key] = polylines;
 			console.log("add " + polylines.length + " polylines (" + key + ")");
-			(key == "vorrangnetz") && $.mapView.addPolylines(Overlays.vorrangnetz);
+			$.mapView.addPolylines(Overlays[key]);
 		});
 	});
 
@@ -108,19 +106,6 @@ function getStyle(style) {
 		}
 
 	});
-	$.onLocationChanged = function(e) {
-		var coords = e.coords;
-		if (!coords || !focused) {
-			return;
-		}
-		$.mapView.setLocation({
-			animate : true,
-			latitudeDelta : $.mapView.getRegion().latitudeDelta,
-			longitudeDelta : $.mapView.getRegion().longitudeDelta,
-			latitude : coords.latitude,
-			longitude : coords.longitude
-		});
-	};
 
 	$.mapView.addEventListener("userLocation", function(e) {
 		$.usertracking && $.mapView.setLocation({
